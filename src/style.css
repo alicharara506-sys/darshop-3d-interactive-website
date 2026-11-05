@@ -83,3 +83,14 @@ body.short .panel .hint { display: none; }
 body.short .panel .ctas { margin-top: 12px; } body.short .btn { padding: 10px 16px; font-size: 13px; }
 body.short .gauge { right: 14px; bottom: 12px; }
 body.short .proto { bottom: 6px; }
+
+/* site menu on the 3D home page (button + drop-down) */
+.home-nav { position: relative; }
+.home-nav .s-menu-btn { width: 42px; height: 42px; border: 0; background: rgba(255,255,255,.85); border-radius: 50%; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; }
+.home-nav .s-menu-btn span { display: block; width: 16px; height: 2px; background: var(--ink); border-radius: 2px; }
+.home-nav .s-nav { display: none; position: absolute; top: calc(100% + 8px); inset-inline-end: 0; flex-direction: column; background: #fff; border-radius: 14px; padding: 8px; box-shadow: 0 16px 40px rgba(0,0,0,.15); min-width: 210px; z-index: 20; }
+.home-nav .s-nav.open { display: flex; }
+.home-nav .s-nav a { text-decoration: none; color: var(--grey); font-weight: 600; font-size: 15px; padding: 11px 14px; border-radius: 9px; }
+.home-nav .s-nav a:hover { background: #f1f2f3; color: var(--ink); }
+.home-nav .s-nav a.on { color: var(--o); }
+body.portrait .home-nav .s-menu-btn { width: 38px; height: 38px; background: #fff; }

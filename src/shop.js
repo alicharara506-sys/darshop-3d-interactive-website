@@ -4,12 +4,15 @@ import catalog from '../data/catalog-sakr.json';
 import photos from '../data/photos.json';
 import { SHOP } from './shop-i18n.js';
 import { createCategoryCarousel } from './cat3d.js';
+import { CAT_ICONS } from './cat-icons.js';
+import { navHTML, initMenu } from './site-nav.js';
 import { footerHTML, detailsHTML, doneHTML, orderMessage, validate, makeRef, waLink } from './checkout.js';
 import './shop.css';
 
 const q = new URLSearchParams(location.search);
 const BRANDS = { total: { name: 'TOTAL' }, jadever: { name: 'Jadever' } };
-const CAT_ORDER = ['power', 'hand', 'garden', 'cleaning', 'measure', 'accessories', 'welding', 'storage', 'home'];
+// TOTAL's 11 official categories, in TOTAL's order.
+const CAT_ORDER = ['power', 'accessories', 'generators', 'welding', 'construction', 'air', 'pumps', 'hand', 'measure', 'safety', 'garden'];
 
 const products = catalog.map((p, i) => ({ ...p, rank: i, img: photos[p.id] || null }));
 const state = {
@@ -106,9 +109,18 @@ function renderSide() {
   $('side').innerHTML = `
     <p class="s-side-h">${tt.categories}</p>
     <div class="s-cats">
-      <button data-cat="all" class="${state.cat === 'all' ? 'on' : ''}">${tt.all}<span>${base.length}</span></button>
-      ${CAT_ORDER.filter(c => counts[c]).map(c => `<button data-cat="${c}" class="${state.cat === c ? 'on' : ''}">${tt.cats[c]}<span>${counts[c]}</span></button>`).join('')}
+      <button data-cat="all" class="${state.cat === 'all' ? 'on' : ''}"><i>${CAT_ICONS.all}</i><em>${tt.all}</em><span>${base.length}</span></button>
+      ${CAT_ORDER.filter(c => counts[c]).map(c => `<button data-cat="${c}" class="${state.cat === c ? 'on' : ''}"><i>${CAT_ICONS[c]}</i><em>${tt.cats[c]}</em><span>${counts[c]}</span></button>`).join('')}
     </div>`;
+  renderCatRow(counts);
+}
+// Row of all 11 categories with icons (like TOTAL's site). Empty ones say "Coming soon".
+function renderCatRow(counts) {
+  const tt = t();
+  $('catrow').innerHTML = `<div class="s-catrow-in">${CAT_ORDER.map(c => `
+    <button class="s-catico ${state.cat === c ? 'on' : ''} ${counts[c] ? '' : 'empty'}" ${counts[c] ? `data-cat="${c}"` : 'disabled'}>
+      <i>${CAT_ICONS[c]}</i><b>${tt.cats[c]}</b><small>${counts[c] ? tt.count(counts[c]) : tt.soonCat}</small>
+    </button>`).join('')}</div>`;
 }
 
 function renderGrid() {
@@ -241,6 +253,7 @@ function renderAll() {
   $('q').placeholder = tt.search;
   $('cartBtn').setAttribute('aria-label', tt.order);
   document.querySelectorAll('.s-langs button').forEach(b => b.classList.toggle('on', b.dataset.l === state.lang));
+  $('navSlot').innerHTML = navHTML(state.lang, 'shop');
   renderHero(); renderSide(); renderGrid(); renderFoot(); renderCart(); syncUrl();
 }
 
@@ -274,5 +287,6 @@ document.addEventListener('submit', e => { if (e.target.id === 'coForm') { e.pre
 $('q').addEventListener('input', e => { state.search = e.target.value; renderGrid(); });
 
 // The carousel is created once; brand / language changes just give it new tiles.
+initMenu();
 const carousel = createCategoryCarousel($('c3d'), { onSelect: (key) => selectCat(key, true) });
 renderAll();

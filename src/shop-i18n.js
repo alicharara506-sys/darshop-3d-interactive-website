@@ -2,7 +2,7 @@
 // Product names stay in English, as they are printed on the packaging.
 export const SHOP = {
   en: {
-    title: 'Shop',
+    title: 'Shop', soonCat: 'Coming soon',
     foot: { tagline: 'Tools for a Stronger Tomorrow. Official TOTAL and Jadever partner in Beirut.', partners: 'Official partner', shop: 'Shop', shopTotal: 'Shop TOTAL', shopJadever: 'Shop Jadever', visit: 'Visit us', address: 'Sfeir Raya Center, Beirut, Lebanon', hours: 'Mon–Sat · opening hours to confirm', chat: 'Chat with us on WhatsApp', pay: 'Ways to order', payWa: 'Order on WhatsApp', payWhish: 'Pay online with Whish', payStore: 'Pay in store or on delivery', rights: 'All rights reserved.' },
     co: { checkout: 'Checkout', ways: 'Order on WhatsApp or pay online with Whish', title: 'Checkout', doneTitle: 'Order placed', back: '← Back to your order', contact: 'Your details', name: 'Full name', phone: 'Phone number', receive: 'How do you want to receive it?', delivery: 'Delivery', deliveryHint: 'We deliver across Lebanon; fee confirmed on WhatsApp', pickup: 'Pick up in store', pickupHint: 'Sfeir Raya Center, Beirut', address: 'Delivery address', addressPh: 'Area, street, building, floor', payHow: 'Payment', payWa: 'Order on WhatsApp', payWaHint: 'We confirm on WhatsApp. Pay on delivery or in store.', payWhish: 'Pay online with Whish', payWhishHint: 'Pay now with your Whish account.', notes: 'Notes (optional)', submitWa: 'Send order on WhatsApp', submitWhish: 'Pay {t} with Whish', errName: 'Enter your name.', errPhone: 'Enter a valid phone number.', errAddress: 'Enter your delivery address.', ref: 'Order number', waTitle: 'Your order is ready on WhatsApp', waBody: 'WhatsApp opened with your order. Press send, and we will confirm stock, delivery and the final price.', waAgain: 'Open WhatsApp again', whishTitle: 'Whish payment', whishBody: 'In the live shop you will now be taken to Whish to pay {t} securely.', whishProto: 'Prototype: Whish is not connected yet, so no payment was taken.', continue: 'Continue shopping' }, statProducts: 'products', statCats: 'categories', dragHint: 'Swipe or drag to browse categories', partner: 'Official partner', allBrands: 'All brands',
     search: 'Search tools, model codes…', categories: 'Categories', all: 'All products',
@@ -16,13 +16,11 @@ export const SHOP = {
     back: '← Home', photoSoon: 'Photo coming soon',
     visit: 'Sfeir Raya Center, Beirut', follow: '@darshop.lb', proto: 'Prototype · prices are placeholders',
     cats: {
-      power: 'Power tools', cleaning: 'Cleaning & pressure washers', garden: 'Garden & watering', hand: 'Hand tools',
-      measure: 'Measuring & testing', accessories: 'Accessories & consumables', welding: 'Welding & safety',
-      storage: 'Storage, ladders & workshop', home: 'Home, electrical & auto',
+      power: 'Power Tools', accessories: 'Power Tools Accessories', generators: 'Generators', welding: 'Welding Machines', construction: 'Small Construction Equipment', air: 'Air Tools', pumps: 'Water Pumps', hand: 'Hand Tools', measure: 'Measuring Tools', safety: 'Safety Products', garden: 'Garden Tools',
     },
   },
   fr: {
-    title: 'Boutique',
+    title: 'Boutique', soonCat: 'Bientôt',
     foot: { tagline: 'Des outils pour un avenir plus solide. Partenaire officiel TOTAL et Jadever à Beyrouth.', partners: 'Partenaire officiel', shop: 'Boutique', shopTotal: 'Boutique TOTAL', shopJadever: 'Boutique Jadever', visit: 'Nous trouver', address: 'Sfeir Raya Center, Beyrouth, Liban', hours: 'Lun–Sam · horaires à confirmer', chat: 'Discutez avec nous sur WhatsApp', pay: 'Comment commander', payWa: 'Commander sur WhatsApp', payWhish: 'Payer en ligne avec Whish', payStore: 'Payer en boutique ou à la livraison', rights: 'Tous droits réservés.' },
     co: { checkout: 'Commander', ways: 'Commandez sur WhatsApp ou payez en ligne avec Whish', title: 'Commande', doneTitle: 'Commande passée', back: '← Retour à la commande', contact: 'Vos coordonnées', name: 'Nom complet', phone: 'Téléphone', receive: 'Comment souhaitez-vous la recevoir ?', delivery: 'Livraison', deliveryHint: 'Livraison dans tout le Liban ; frais confirmés sur WhatsApp', pickup: 'Retrait en boutique', pickupHint: 'Sfeir Raya Center, Beyrouth', address: 'Adresse de livraison', addressPh: 'Quartier, rue, immeuble, étage', payHow: 'Paiement', payWa: 'Commander sur WhatsApp', payWaHint: 'Nous confirmons sur WhatsApp. Paiement à la livraison ou en boutique.', payWhish: 'Payer en ligne avec Whish', payWhishHint: 'Payez maintenant avec votre compte Whish.', notes: 'Remarques (facultatif)', submitWa: 'Envoyer la commande sur WhatsApp', submitWhish: 'Payer {t} avec Whish', errName: 'Indiquez votre nom.', errPhone: 'Indiquez un numéro valide.', errAddress: 'Indiquez votre adresse de livraison.', ref: 'Numéro de commande', waTitle: 'Votre commande est prête sur WhatsApp', waBody: 'WhatsApp s’est ouvert avec votre commande. Appuyez sur envoyer : nous confirmons le stock, la livraison et le prix final.', waAgain: 'Rouvrir WhatsApp', whishTitle: 'Paiement Whish', whishBody: 'Dans la boutique en ligne, vous serez redirigé vers Whish pour payer {t} en toute sécurité.', whishProto: 'Prototype : Whish n’est pas encore connecté, aucun paiement n’a été effectué.', continue: 'Continuer mes achats' }, statProducts: 'produits', statCats: 'catégories', dragHint: 'Glissez pour parcourir les catégories', partner: 'Partenaire officiel', allBrands: 'Toutes les marques',
     search: 'Rechercher un outil, un code…', categories: 'Catégories', all: 'Tous les produits',
@@ -36,13 +34,11 @@ export const SHOP = {
     back: '← Accueil', photoSoon: 'Photo bientôt',
     visit: 'Sfeir Raya Center, Beyrouth', follow: '@darshop.lb', proto: 'Prototype · prix indicatifs',
     cats: {
-      power: 'Outillage électrique', cleaning: 'Nettoyage & haute pression', garden: 'Jardin & arrosage', hand: 'Outils à main',
-      measure: 'Mesure & test', accessories: 'Accessoires & consommables', welding: 'Soudure & sécurité',
-      storage: 'Rangement, échelles & atelier', home: 'Maison, électricité & auto',
+      power: 'Outillage électrique', accessories: 'Accessoires d’outillage', generators: 'Groupes électrogènes', welding: 'Postes à souder', construction: 'Petit matériel de chantier', air: 'Outils pneumatiques', pumps: 'Pompes à eau', hand: 'Outils à main', measure: 'Outils de mesure', safety: 'Équipements de sécurité', garden: 'Outils de jardin',
     },
   },
   ar: {
-    title: 'المتجر',
+    title: 'المتجر', soonCat: 'قريباً',
     foot: { tagline: 'أدوات لغدٍ أقوى. شريك رسمي لـ TOTAL و Jadever في بيروت.', partners: 'شريك رسمي', shop: 'المتجر', shopTotal: 'تسوّق TOTAL', shopJadever: 'تسوّق Jadever', visit: 'زورونا', address: 'سنتر صفير رايا، بيروت، لبنان', hours: 'الاثنين–السبت · الدوام قيد التأكيد', chat: 'راسلنا على واتساب', pay: 'طرق الطلب', payWa: 'اطلب عبر واتساب', payWhish: 'ادفع أونلاين عبر Whish', payStore: 'الدفع في المتجر أو عند التسليم', rights: 'جميع الحقوق محفوظة.' },
     co: { checkout: 'إتمام الطلب', ways: 'اطلب عبر واتساب أو ادفع أونلاين عبر Whish', title: 'إتمام الطلب', doneTitle: 'تم الطلب', back: 'العودة إلى الطلب →', contact: 'معلوماتك', name: 'الاسم الكامل', phone: 'رقم الهاتف', receive: 'كيف تريد استلام طلبك؟', delivery: 'توصيل', deliveryHint: 'نوصّل إلى كل لبنان؛ رسم التوصيل يُؤكَّد عبر واتساب', pickup: 'استلام من المتجر', pickupHint: 'سنتر صفير رايا، بيروت', address: 'عنوان التوصيل', addressPh: 'المنطقة، الشارع، المبنى، الطابق', payHow: 'الدفع', payWa: 'اطلب عبر واتساب', payWaHint: 'نؤكّد عبر واتساب. الدفع عند التسليم أو في المتجر.', payWhish: 'ادفع أونلاين عبر Whish', payWhishHint: 'ادفع الآن من حسابك في Whish.', notes: 'ملاحظات (اختياري)', submitWa: 'أرسل الطلب عبر واتساب', submitWhish: 'ادفع {t} عبر Whish', errName: 'أدخل اسمك.', errPhone: 'أدخل رقم هاتف صحيحاً.', errAddress: 'أدخل عنوان التوصيل.', ref: 'رقم الطلب', waTitle: 'طلبك جاهز على واتساب', waBody: 'فُتح واتساب مع طلبك. اضغط إرسال، وسنؤكّد التوفّر والتوصيل والسعر النهائي.', waAgain: 'افتح واتساب مجدداً', whishTitle: 'الدفع عبر Whish', whishBody: 'في المتجر الفعلي سيتم تحويلك إلى Whish لدفع {t} بأمان.', whishProto: 'نموذج أولي: Whish غير مربوط بعد، لم يتم أي دفع.', continue: 'متابعة التسوّق' }, statProducts: 'منتج', statCats: 'فئات', dragHint: 'اسحب لتصفّح الفئات', partner: 'شريك رسمي', allBrands: 'كل العلامات',
     search: 'ابحث عن أداة أو رمز الموديل…', categories: 'الفئات', all: 'كل المنتجات',
@@ -56,9 +52,7 @@ export const SHOP = {
     back: 'الرئيسية →', photoSoon: 'الصورة قريباً',
     visit: 'سنتر صفير رايا، بيروت', follow: '@darshop.lb', proto: 'نموذج أولي · الأسعار تقديرية',
     cats: {
-      power: 'عدّة كهربائية', cleaning: 'تنظيف ومضخات ضغط', garden: 'حديقة وريّ', hand: 'أدوات يدوية',
-      measure: 'قياس وفحص', accessories: 'ملحقات ومستهلكات', welding: 'لحام وسلامة',
-      storage: 'تخزين وسلالم وورشة', home: 'منزل وكهرباء وسيارات',
+      power: 'عدّة كهربائية', accessories: 'ملحقات العدّة الكهربائية', generators: 'مولّدات', welding: 'ماكينات لحام', construction: 'معدّات بناء صغيرة', air: 'عدّة هوائية', pumps: 'مضخات مياه', hand: 'أدوات يدوية', measure: 'أدوات قياس', safety: 'معدّات سلامة', garden: 'أدوات حديقة',
     },
   },
 };

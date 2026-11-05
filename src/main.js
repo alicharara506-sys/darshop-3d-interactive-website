@@ -3,6 +3,7 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 import { buildTools, buildPhotoCards } from './tools.js';
 import { STR } from './i18n.js';
+import { navHTML, initMenu } from './site-nav.js';
 import './style.css';
 
 // ---------- helpers ----------
@@ -342,6 +343,7 @@ function setLang(l) {
   document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
   document.querySelectorAll('.langs button').forEach(b => b.classList.toggle('on', b.dataset.l === l));
   document.getElementById('tag').textContent = STR[l].tag;
+  document.getElementById('navSlot').innerHTML = navHTML(l, 'home');
   drawBayLabels();
   resize();
   renderPanel(stageIndex(pSmooth));
@@ -409,3 +411,4 @@ document.fonts.load('800 100px Montserrat').then(() => document.fonts.load('700 
   if (PIN !== null) document.body.classList.add('pinned');
   frame();
 });
+initMenu();

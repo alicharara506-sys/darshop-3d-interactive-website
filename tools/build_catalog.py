@@ -128,23 +128,37 @@ Plate Carrier|JDTN1001|Hand Tools|9.00|plate-carrier-jadever-jdtn1001|2024/06/dc
 Cordless Screwdriver|JDCV4401|Cordless Drills|18.00|cordless-screwdriver-jadever-jdcv4401|2024/03/ccdcdcdcdcdcd-300x300.jpg
 Bronze Lock||Door Furniture, Ironmongery & Locks|2.00-4.00|bronze-lock-jadever|2024/03/dcdcdcdcdc-300x300.jpg"""
 
-# DAR shop categories (8) built from SAKR's 40+ categories.
+# DAR shop categories = TOTAL's 11 official categories (totalbusiness.com/products).
+# SAKR's 40+ categories are mapped onto them; a few items go by model-code prefix.
 CATEGORIES = {
     'power': ['Cordless Drills', 'Angle Grinders', 'Rotary Hammer', 'Blowers', 'Power Tools', 'Power Tools Bundles',
-              'Orbital Sanders', 'Batteries & Chargers', 'Soldering Tools', 'Paint Sprayers'],
-    'cleaning': ['Vacuum Cleaners', 'Washer Pressures and Accessories', 'Cleaning Tools & Supplies'],
-    'garden': ['Gardening Power Tools', 'Gardening Tools', 'Water Sprinklers & Irrigation Supplies', 'Outdoor Living'],
-    'hand': ['Hand Tools', 'Hand Tool Sets', 'Pliers & Cutters', 'Screwdrivers & Hex Keys', 'Screwdriver Bits & Holders',
-             'Wrenches & Spanners', 'Hammers', 'Hand Saws', 'Finishing Tools', 'Striking Tools', 'Knives & Blades',
-             'Pipe & Plumbing Tools'],
+              'Orbital Sanders', 'Soldering Tools', 'Paint Sprayers', 'Vacuum Cleaners', 'Washer Pressures and Accessories',
+              'Flashlights & Work Lights'],
+    'accessories': ['Batteries & Chargers', 'Cutting & Grinding Discs', 'Sanding Accessories', 'Tool Accessories',
+                    'Screwdriver Bits & Holders', 'Electrical & Lighting'],
+    'generators': [],
+    'welding': ['Welding Machines', 'Welding Accessories & Protection'],
+    'construction': ['Ladders', 'Heavy Lifting Equipment', 'Automotive Tools'],
+    'air': [],
+    'pumps': [],
+    'hand': ['Hand Tools', 'Hand Tool Sets', 'Pliers & Cutters', 'Screwdrivers & Hex Keys', 'Wrenches & Spanners', 'Hammers',
+             'Hand Saws', 'Finishing Tools', 'Striking Tools', 'Knives & Blades', 'Pipe & Plumbing Tools', 'Tool Bags',
+             'Tool Boxes', 'Tool Storage & Workshop Equipment', 'Door Furniture, Ironmongery & Locks', 'Safe Boxes',
+             'Brushes & Rollers', 'Cleaning Tools & Supplies', 'Car Tools & Accessories'],
     'measure': ['Measuring Tools', 'Electrician Measuring Tools'],
-    'accessories': ['Cutting & Grinding Discs', 'Sanding Accessories', 'Tool Accessories', 'Brushes & Rollers'],
-    'welding': ['Welding Machines', 'Welding Accessories & Protection', 'Safety Footwear'],
-    'storage': ['Tool Bags', 'Tool Boxes', 'Tool Storage & Workshop Equipment', 'Heavy Lifting Equipment', 'Ladders'],
-    'home': ['Electrical & Lighting', 'Flashlights & Work Lights', 'Door Furniture, Ironmongery & Locks', 'Safe Boxes',
-             'Car Tools & Accessories', 'Automotive Tools'],
+    'safety': ['Safety Footwear'],
+    'garden': ['Gardening Power Tools', 'Gardening Tools', 'Water Sprinklers & Irrigation Supplies', 'Outdoor Living'],
 }
 TO_SHOP = {src: shop for shop, srcs in CATEGORIES.items() for src in srcs}
+BY_CODE = {'TAT': 'air', 'JDGA': 'air', 'TOSLL': 'measure'}  # TOTAL air tools, Jadever air blow gun, laser kit
+
+
+def shop_cat(code, cat):
+    for prefix, shop in BY_CODE.items():
+        if code.startswith(prefix):
+            return shop
+    return TO_SHOP[cat]
+
 
 out, seen = [], set()
 for brand, blob in (('total', TOTAL), ('jadever', JADEVER)):
@@ -156,7 +170,7 @@ for brand, blob in (('total', TOTAL), ('jadever', JADEVER)):
         lo, _, hi = price.partition('-')
         out.append({
             'id': f'{brand}-{slug}', 'brand': brand, 'name': name, 'code': code,
-            'cat': TO_SHOP[cat], 'sourceCat': cat,
+            'cat': shop_cat(code, cat), 'sourceCat': cat,
             'refPrice': float(lo), 'refPriceMax': float(hi) if hi else None,
             'source': f'https://www.sakrlb.com/product/{slug}/',
             'sourceImg': f'https://www.sakrlb.com/wp-content/uploads/{img}',

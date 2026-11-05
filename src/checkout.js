@@ -5,6 +5,8 @@
 // server to create the payment; until then the Whish step shows a confirmation
 // screen and no money is taken.
 
+import { companyLinksHTML } from './site-nav.js';
+
 // Shop contact details. Fill in the missing ones before launch.
 export const CONTACT = {
   whatsapp: '',                                        // e.g. '96179004108' (not confirmed yet)
@@ -48,6 +50,7 @@ export function footerHTML(tt, lang) {
       <a href="/shop.html?brand=all&cat=hand&lang=${lang}">${tt.cats.hand}</a>
       <a href="/shop.html?brand=all&cat=garden&lang=${lang}">${tt.cats.garden}</a>
     </nav>
+    ${companyLinksHTML(lang)}
     <div class="f-col"><h4>${f.visit}</h4>
       <p class="f-row">${ICONS.pin}<span>${f.address}</span></p>
       <p class="f-row">${ICONS.clock}<span>${f.hours}</span></p>
