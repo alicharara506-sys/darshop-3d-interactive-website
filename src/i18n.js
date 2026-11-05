@@ -1,0 +1,61 @@
+// Site copy in English, French and Arabic.
+// The Arabic is a draft and needs a native review before anything goes live.
+export const STR = {
+  en: {
+    tag: 'Official partner · TOTAL · Jadever',
+    stages: [
+      { k: 'DAR Building Materials Shop · Beirut', t: 'Tools for a Stronger Tomorrow', b: 'Official partner of TOTAL and Jadever. Tap any tool to see what it is.' },
+      { k: 'Partner brand', t: 'TOTAL', shop: 'total', b: 'Power tools and hand tools for every job site: drills, grinders, saws and batteries.' },
+      { k: 'Partner brand', t: 'Jadever', shop: 'jadever', b: 'Hand tools you can count on: screwdrivers, pliers, tape measures and tool cases.' },
+      { k: 'Coming soon', t: 'More brands on the way', b: 'Schneider Electric, ABB and Parkside are coming to the shop soon.' },
+      { k: 'Sfeir Raya Center · Beirut', t: 'Visit the shop', b: 'Come and see the tools in person, or message us on WhatsApp.', cta: 'WhatsApp us', ig: '@darshop.lb' },
+    ],
+    soon: 'Coming soon', shopBtn: 'Shop {b} →',
+    shopPage: { back: '← Back to the shop', partner: 'Official partner brand', count: '{n} products', price: 'Price on request', order: 'Order on WhatsApp', empty: '{b} products are being added to the shop.', ask: 'Ask us on WhatsApp' },
+    scroll: 'Scroll',
+    tools: {
+      lamp: 'Cordless work lamp', bag: 'Rolling tool bag', impactDrill: 'Impact drill', impactWrench: 'Impact wrench', breaker: 'Demolition breaker', blower: 'Cordless blower', charger: 'Battery charger',
+      drill: 'Cordless drill', hammer: 'Rotary hammer', grinder: 'Angle grinder', blade: 'Circular saw blade',
+      battery: 'Battery pack', driver: 'Impact driver', screwdriver: 'Screwdriver', tape: 'Tape measure',
+      pliers: 'Pliers', toolbox: 'Tool case', level: 'Spirit level', wrench: 'Adjustable wrench', bits: 'Drill bit set',
+    },
+  },
+  fr: {
+    tag: 'Partenaire officiel · TOTAL · Jadever',
+    stages: [
+      { k: 'DAR Building Materials Shop · Beyrouth', t: 'Des outils pour un avenir plus solide', b: 'Partenaire officiel de TOTAL et Jadever. Touchez un outil pour le découvrir.' },
+      { k: 'Marque partenaire', t: 'TOTAL', shop: 'total', b: 'Outillage électrique et à main pour tous les chantiers : perceuses, meuleuses, scies et batteries.' },
+      { k: 'Marque partenaire', t: 'Jadever', shop: 'jadever', b: 'Des outils à main fiables : tournevis, pinces, mètres ruban et mallettes.' },
+      { k: 'Bientôt', t: 'D’autres marques arrivent', b: 'Schneider Electric, ABB et Parkside arrivent bientôt dans la boutique.' },
+      { k: 'Sfeir Raya Center · Beyrouth', t: 'Visitez la boutique', b: 'Venez voir les outils sur place, ou écrivez-nous sur WhatsApp.', cta: 'Écrivez-nous', ig: '@darshop.lb' },
+    ],
+    soon: 'Bientôt', shopBtn: 'Acheter {b} →',
+    shopPage: { back: '← Retour à la boutique', partner: 'Marque partenaire officielle', count: '{n} produits', price: 'Prix sur demande', order: 'Commander sur WhatsApp', empty: 'Les produits {b} arrivent bientôt dans la boutique.', ask: 'Demandez-nous sur WhatsApp' },
+    scroll: 'Défiler',
+    tools: {
+      lamp: 'Lampe de travail sans fil', bag: 'Sac à outils à roulettes', impactDrill: 'Perceuse à percussion', impactWrench: 'Clé à chocs', breaker: 'Marteau-piqueur', blower: 'Souffleur sans fil', charger: 'Chargeur de batterie',
+      drill: 'Perceuse sans fil', hammer: 'Perforateur', grinder: 'Meuleuse d’angle', blade: 'Lame de scie circulaire',
+      battery: 'Batterie', driver: 'Visseuse à chocs', screwdriver: 'Tournevis', tape: 'Mètre ruban',
+      pliers: 'Pince', toolbox: 'Mallette à outils', level: 'Niveau à bulle', wrench: 'Clé à molette', bits: 'Coffret de forets',
+    },
+  },
+  ar: {
+    tag: 'شريك رسمي · TOTAL · Jadever',
+    stages: [
+      { k: 'DAR Building Materials Shop · بيروت', t: 'أدوات لغدٍ أقوى', b: 'شريك رسمي لـ TOTAL و Jadever. اضغط على أي أداة لتتعرّف عليها.' },
+      { k: 'علامة شريكة', t: 'TOTAL', shop: 'total', b: 'عُدّة كهربائية ويدوية لكل ورشة: مثاقب، جلّاخات، مناشير وبطاريات.' },
+      { k: 'علامة شريكة', t: 'Jadever', shop: 'jadever', b: 'أدوات يدوية تعتمد عليها: مفكات، كمّاشات، أمتار قياس وصناديق عدّة.' },
+      { k: 'قريباً', t: 'علامات جديدة في الطريق', b: 'Schneider Electric و ABB و Parkside قريباً في المتجر.' },
+      { k: 'سنتر صفير رايا · بيروت', t: 'زورونا في المتجر', b: 'تعال وشاهد الأدوات بنفسك، أو راسلنا على واتساب.', cta: 'راسلنا على واتساب', ig: '@darshop.lb' },
+    ],
+    soon: 'قريباً', shopBtn: 'تسوّق {b} ←',
+    shopPage: { back: 'العودة إلى المتجر →', partner: 'علامة شريكة رسمية', count: '{n} منتجاً', price: 'السعر عند الطلب', order: 'اطلب عبر واتساب', empty: 'منتجات {b} تُضاف إلى المتجر قريباً.', ask: 'اسألنا على واتساب' },
+    scroll: 'مرّر',
+    tools: {
+      lamp: 'كشّاف عمل لاسلكي', bag: 'حقيبة عدّة بعجلات', impactDrill: 'مثقاب طرقي', impactWrench: 'مفتاح صدمات', breaker: 'مطرقة تكسير', blower: 'منفاخ لاسلكي', charger: 'شاحن بطارية',
+      drill: 'مثقاب لاسلكي', hammer: 'مطرقة ثاقبة', grinder: 'جلّاخة (صاروخ)', blade: 'شفرة منشار دائري',
+      battery: 'بطارية', driver: 'مفك صدمات', screwdriver: 'مفك براغي', tape: 'متر قياس',
+      pliers: 'كمّاشة', toolbox: 'صندوق عدّة', level: 'ميزان ماء', wrench: 'مفتاح إنكليزي', bits: 'طقم ريش مثقاب',
+    },
+  },
+};

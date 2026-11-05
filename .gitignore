@@ -1,0 +1,10 @@
+# dependencies and build output (recreate with npm install / npm run build)
+node_modules/
+dist/
+# 66 MB original Higgsfield model; the compressed one is in public/products/total/3d-hf/
+media-src/drill_raw.glb
+# Python cache
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
