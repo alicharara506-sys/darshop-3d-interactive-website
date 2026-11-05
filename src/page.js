@@ -3,9 +3,9 @@
 import { SHOP } from './shop-i18n.js';
 import { PAGE } from './pages-i18n.js';
 import { navHTML, initMenu, NAV } from './site-nav.js';
-import { footerHTML, ICONS, CONTACT, waLink } from './checkout.js';
+import { footerHTML, ICONS, CONTACT, waLink, applySettings } from './checkout.js';
 import { CAT_ICONS } from './cat-icons.js';
-import { LIVE, sendContactMessage } from './api.js';
+import { LIVE, sendContactMessage, loadSettings } from './api.js';
 import './shop.css';
 import './page.css';
 
@@ -64,7 +64,7 @@ const RENDER = {
     <section class="p-sec p-contact">
       <div class="p-info">
         <div class="p-card"><i>${ICONS.pin}</i><h3>${p.shopH}</h3><p>${p.address}</p><a href="${MAP}" target="_blank" rel="noopener">${p.map} <span class="arw">→</span></a></div>
-        <div class="p-card"><i>${ICONS.clock}</i><h3>${p.hoursH}</h3><p>${p.hours}</p></div>
+        <div class="p-card"><i>${ICONS.clock}</i><h3>${p.hoursH}</h3><p>${CONTACT.hours?.[lang] || p.hours}</p></div>
         <div class="p-card"><i>${ICONS.whatsapp}</i><h3>${p.waH}</h3><p>${p.waBody}</p><a href="${waLink(SHOP[lang].waAsk)}" target="_blank" rel="noopener">${p.waBtn} <span class="arw">→</span></a></div>
         <div class="p-card"><h3>${p.followH}</h3><div class="f-socials">${soc('instagram', 'Instagram')}${soc('facebook', 'Facebook')}${soc('tiktok', 'TikTok')}</div></div>
       </div>
@@ -116,3 +116,4 @@ document.addEventListener('input', (e) => { const el = e.target.closest('label')
 
 initMenu();
 render();
+if (LIVE) loadSettings().then((st) => { applySettings(st); render(); }).catch(err => console.warn('Using default contact details.', err));

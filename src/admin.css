@@ -121,3 +121,14 @@ body.panel-open .a-dim { opacity: 1; pointer-events: auto; }
   .a-prod-name { grid-column: 2 / -1; }
   .a-prod .a-btn { grid-column: 1 / -1; }
 }
+
+/* product editor + settings */
+.a-prod-name { border: 0; background: none; text-align: start; padding: 0; }
+.a-prod-name:hover b { color: var(--o); }
+.a-photo { width: 100%; aspect-ratio: 4 / 3; border: 1px dashed #c9ccd1; border-radius: 12px; display: grid; place-items: center; background: #fafafa; overflow: hidden; margin-bottom: 10px; }
+.a-photo img { width: 85%; height: 85%; object-fit: contain; } .a-photo span { color: var(--mute); }
+#productForm section { display: flex; flex-direction: column; gap: 10px; }
+.a-two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+input[type=file] { padding: 8px; }
+.a-settings { max-width: 640px; padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+.a-settings h3 { margin: 0; }

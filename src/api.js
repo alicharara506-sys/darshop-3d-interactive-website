@@ -50,6 +50,14 @@ export async function sendContactMessage(fields, lang) {
   return data;
 }
 
+// Contact details edited in the admin panel (site_settings table).
+export async function loadSettings() {
+  if (!LIVE) return null;
+  const { data, error } = await withTimeout(supabase.from('site_settings').select('key, value'));
+  if (error) throw error;
+  return Object.fromEntries(data.map(r => [r.key, r.value]));
+}
+
 export async function orderStatus(ref, phone) {
   if (!LIVE) return null;
   const { data, error } = await withTimeout(supabase.rpc('order_status', { p_ref: ref, p_phone: phone }));

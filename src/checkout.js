@@ -13,7 +13,14 @@ export const CONTACT = {
   instagram: 'https://www.instagram.com/darshop.lb/',  // @darshop.lb
   facebook: '',                                        // page URL not known yet
   tiktok: '',                                          // profile URL not known yet
+  hours: null,                                         // { en, fr, ar } from the admin panel
 };
+// Overwrite the defaults with what the admin saved in Supabase (site_settings).
+export function applySettings(s) {
+  if (!s) return;
+  for (const k of ['whatsapp', 'instagram', 'facebook', 'tiktok']) if (k in s) CONTACT[k] = s[k] || '';
+  if (s.hours_en || s.hours_fr || s.hours_ar) CONTACT.hours = { en: s.hours_en, fr: s.hours_fr, ar: s.hours_ar };
+}
 
 export const ICONS = {
   instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg>',
@@ -53,7 +60,7 @@ export function footerHTML(tt, lang) {
     ${companyLinksHTML(lang)}
     <div class="f-col"><h4>${f.visit}</h4>
       <p class="f-row">${ICONS.pin}<span>${f.address}</span></p>
-      <p class="f-row">${ICONS.clock}<span>${f.hours}</span></p>
+      <p class="f-row">${ICONS.clock}<span>${CONTACT.hours?.[lang] || f.hours}</span></p>
       <a class="f-row f-wa" href="${waLink(tt.waAsk)}" target="_blank" rel="noopener">${ICONS.whatsapp}<span>${f.chat}</span></a>
     </div>
     <div class="f-col"><h4>${f.pay}</h4>

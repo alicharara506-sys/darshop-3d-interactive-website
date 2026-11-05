@@ -5,9 +5,9 @@ import photos from '../data/photos.json';
 import { SHOP } from './shop-i18n.js';
 import { createCategoryCarousel } from './cat3d.js';
 import { CAT_ICONS } from './cat-icons.js';
-import { LIVE, loadProducts, placeOrder } from './api.js';
+import { LIVE, loadProducts, placeOrder, loadSettings } from './api.js';
 import { navHTML, initMenu } from './site-nav.js';
-import { footerHTML, detailsHTML, doneHTML, orderMessage, validate, makeRef, waLink } from './checkout.js';
+import { applySettings, footerHTML, detailsHTML, doneHTML, orderMessage, validate, makeRef, waLink } from './checkout.js';
 import './shop.css';
 
 const q = new URLSearchParams(location.search);
@@ -312,6 +312,7 @@ renderAll();
 
 // When Supabase is connected, the catalogue comes from the database (same shape as the local file).
 if (LIVE) {
+  loadSettings().then((s) => { applySettings(s); renderFoot(); renderCart(); }).catch(err => console.warn('Using default contact details.', err));
   loadProducts().then((rows) => {
     if (!rows || !rows.length) return;
     products.length = 0; products.push(...rows);
