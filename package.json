@@ -3,7 +3,16 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "scripts": { "dev": "vite --port 3230 --strictPort --host", "build": "vite build", "preview": "vite preview" },
-  "dependencies": { "three": "^0.170.0" },
-  "devDependencies": { "vite": "^6.0.7" }
+  "scripts": {
+    "dev": "vite --port 3230 --strictPort --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.119.0",
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.7"
+  }
 }

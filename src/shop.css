@@ -380,3 +380,6 @@ html[dir="rtl"] .co input[type=tel] { text-align: right; }
 /* footer: 5 columns now (brand, shop, company, visit, order) */
 .f-top { grid-template-columns: 1.4fr 1fr 1fr 1.2fr 1.2fr; }
 @media (max-width: 860px) { .f-top { grid-template-columns: 1fr 1fr; } }
+
+.co-err-box { background: #fdecea; border-radius: 10px; padding: 10px 12px; margin: 0; }
+.co-submit:disabled { opacity: .7; cursor: wait; }

@@ -5,6 +5,7 @@ import photos from '../data/photos.json';
 import { SHOP } from './shop-i18n.js';
 import { createCategoryCarousel } from './cat3d.js';
 import { CAT_ICONS } from './cat-icons.js';
+import { LIVE, loadProducts, placeOrder } from './api.js';
 import { navHTML, initMenu } from './site-nav.js';
 import { footerHTML, detailsHTML, doneHTML, orderMessage, validate, makeRef, waLink } from './checkout.js';
 import './shop.css';
@@ -175,12 +176,30 @@ function readForm() {
   const d = new FormData(f);
   for (const k of ['name', 'phone', 'ship', 'address', 'pay', 'notes']) co.form[k] = (d.get(k) || '').toString();
 }
-function submitOrder() {
+let submitting = false;
+async function submitOrder() {
+  if (submitting) return;
   readForm();
   const tt = t(), errors = validate(tt, co.form);
   co.form.errors = errors;
   if (Object.keys(errors).length) { renderCart(); $('coForm').querySelector('.co-err')?.closest('label')?.querySelector('input,textarea')?.focus(); return; }
-  const items = cartItems(), total = items.reduce((s, x) => s + x.p.refPrice * x.n, 0), ref = makeRef();
+  let items = cartItems(), total = items.reduce((s, x) => s + x.p.refPrice * x.n, 0), ref = makeRef();
+  if (LIVE) {
+    // Save the order in Supabase. The server sets the reference and the prices.
+    const btn = $('coForm').querySelector('.co-submit');
+    submitting = true; btn.disabled = true; btn.textContent = tt.co.sending;
+    try {
+      const saved = await placeOrder(co.form, cart, state.lang);
+      ref = saved.ref; total = Number(saved.subtotal);
+      items = saved.items.map(it => ({ p: { name: it.name, code: it.code, refPrice: Number(it.unit_price) }, n: it.qty }));
+    } catch (err) {
+      console.error('place_order failed', err);
+      submitting = false; btn.disabled = false;
+      co.form.errors = { server: String(err.message || '').includes('TOO_MANY') ? tt.co.errTooMany : tt.co.errServer };
+      renderCart(); return;
+    }
+    submitting = false;
+  }
   const link = waLink(orderMessage(tt, items, total, co.form, ref, money));
   co.done = { ref, total, pay: co.form.pay, link };
   if (co.form.pay === 'whatsapp') window.open(link, '_blank', 'noopener');
@@ -290,3 +309,12 @@ $('q').addEventListener('input', e => { state.search = e.target.value; renderGri
 initMenu();
 const carousel = createCategoryCarousel($('c3d'), { onSelect: (key) => selectCat(key, true) });
 renderAll();
+
+// When Supabase is connected, the catalogue comes from the database (same shape as the local file).
+if (LIVE) {
+  loadProducts().then((rows) => {
+    if (!rows || !rows.length) return;
+    products.length = 0; products.push(...rows);
+    renderAll();
+  }).catch(err => console.warn('Using the local catalogue; Supabase products could not be loaded.', err));
+}

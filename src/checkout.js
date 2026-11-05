@@ -93,6 +93,7 @@ export function detailsHTML(tt, form, total, money) {
     </div>
     <label>${c.notes}<textarea name="notes" rows="2">${form.notes || ''}</textarea></label>
     <div class="co-sum"><span>${tt.total}</span><b>$${money(total)}</b></div>
+    ${form.errors?.server ? `<p class="co-err co-err-box">${form.errors.server}</p>` : ''}
     <button class="co-submit ${form.pay === 'whish' ? 'whish' : 'wa'}" type="submit">${form.pay === 'whish' ? c.submitWhish.replace('{t}', '$' + money(total)) : c.submitWa}</button>
     <p class="s-note">${tt.note}</p>
   </form>`;

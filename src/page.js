@@ -5,6 +5,7 @@ import { PAGE } from './pages-i18n.js';
 import { navHTML, initMenu, NAV } from './site-nav.js';
 import { footerHTML, ICONS, CONTACT, waLink } from './checkout.js';
 import { CAT_ICONS } from './cat-icons.js';
+import { LIVE, sendContactMessage } from './api.js';
 import './shop.css';
 import './page.css';
 
@@ -95,7 +96,7 @@ document.addEventListener('click', (e) => {
   if (b) { lang = b.dataset.l; history.replaceState(null, '', `?lang=${lang}`); render(); }
 });
 // Contact form: check the fields, then open WhatsApp with the message written out.
-document.addEventListener('submit', (e) => {
+document.addEventListener('submit', async (e) => {
   if (e.target.id !== 'contactForm') return;
   e.preventDefault();
   const p = PAGE[lang].contact, f = new FormData(e.target), v = k => (f.get(k) || '').toString().trim();
@@ -104,6 +105,11 @@ document.addEventListener('submit', (e) => {
   const bad = Object.keys(errs).find(k => errs[k]);
   if (bad) { e.target.elements[bad].focus(); return; }
   const text = `${p.waHello}\n${p.subject}: ${v('subject')}\n${p.name}: ${v('name')}\n${p.phone}: ${v('phone')}\n\n${v('message')}`;
+  if (LIVE) {
+    // Keep a copy in Supabase so the shop sees every message, even if WhatsApp isn't sent.
+    try { await sendContactMessage({ name: v('name'), phone: v('phone'), subject: v('subject'), message: v('message') }, lang); }
+    catch (err) { console.warn('Message not saved in Supabase; WhatsApp still opens.', err); }
+  }
   window.open(waLink(text), '_blank', 'noopener');
 });
 document.addEventListener('input', (e) => { const el = e.target.closest('label')?.querySelector('[data-err]'); if (el) el.textContent = ''; });
