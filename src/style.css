@@ -2,35 +2,24 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: Montserrat, Arial, sans-serif; }
 html[dir="rtl"] body { font-family: Cairo, Montserrat, Arial, sans-serif; }
-.scroller { height: 420vh; }
+.scroller { height: 230vh; }
 body.pinned .scroller { height: 100vh; }
 
 #stage { position: fixed; inset: 0; z-index: 0; }
+/* Fixed layers of the 3D page leave with it once the page scrolls past the scroller. */
+#stage, .bay-labels, .shelf-card, .pin-out { translate: 0 calc(-1 * var(--out, 0px)); }
 #stage canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; }
 
-.top { position: fixed; z-index: 5; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 24px; padding: 22px 36px; pointer-events: none; }
-.top > * { pointer-events: auto; }
-.logo { display: flex; align-items: stretch; gap: 8px; text-decoration: none; color: var(--ink); direction: ltr; }
-.logo svg { height: 46px; width: auto; }
-.logo .word { display: flex; flex-direction: column; justify-content: center; line-height: 1; }
-.logo b { font-size: 31px; font-weight: 800; letter-spacing: -0.5px; }
-.logo small { font-size: 10.5px; font-weight: 600; color: #6b6e73; margin-top: 3px; letter-spacing: 0.1px; }
-.logo em { font-style: normal; color: var(--o); }
-.tag { margin: 0 0 0 auto; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); }
-html[dir="rtl"] .tag { margin: 0 auto 0 0; letter-spacing: 0; text-transform: none; }
-.langs { display: flex; gap: 4px; background: rgba(255,255,255,.7); padding: 4px; border-radius: 999px; }
-.langs button { border: 0; background: none; font: 600 12px Montserrat, Cairo, sans-serif; padding: 7px 11px; border-radius: 999px; cursor: pointer; color: var(--grey); }
-.langs button.on { background: var(--ink); color: #fff; }
 
-.panel { position: fixed; z-index: 4; left: 6vw; top: 50%; transform: translateY(-50%); width: min(30vw, 440px); }
-html[dir="rtl"] .panel { left: auto; right: 6vw; }
+.panel { position: fixed; z-index: 4; left: max(32px, calc((100vw - 1216px) / 2)); top: 50%; transform: translateY(-50%); width: min(30vw, 440px); }
+html[dir="rtl"] .panel { left: auto; right: max(32px, calc((100vw - 1216px) / 2)); }
+.panel.empty { visibility: hidden; }
 .panel .k { margin: 0 0 14px; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--o); }
 html[dir="rtl"] .panel .k { letter-spacing: 0; text-transform: none; font-size: 15px; }
 .panel h1 { margin: 0 0 16px; font-size: clamp(30px, 3.4vw, 52px); line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; }
 html[dir="rtl"] .panel h1 { letter-spacing: 0; line-height: 1.3; }
 .panel .b { margin: 0; font-size: 16px; line-height: 1.6; color: var(--grey); max-width: 36ch; }
 .panel .deg-unused { margin: 18px 0 0; font-size: 64px; font-weight: 800; color: var(--o); font-variant-numeric: tabular-nums; direction: ltr; text-align: start; }
-.panel .hint { margin: 28px 0 0; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #8b8e93; }
 .panel .ctas { display: flex; align-items: center; gap: 18px; margin-top: 24px; flex-wrap: wrap; }
 .btn { background: var(--o); color: #fff; text-decoration: none; font-weight: 700; padding: 14px 22px; border-radius: 999px; }
 .ig { color: var(--ink); font-weight: 600; text-decoration: none; direction: ltr; }
@@ -48,19 +37,12 @@ html[dir="rtl"] .panel h1 { letter-spacing: 0; line-height: 1.3; }
 .tip span.total { background: #0b7480; color: #fff; }
 .tip span.jadever { background: #f3c300; color: #1f7a37; }
 
-.proto { white-space: nowrap; position: fixed; z-index: 4; left: 50%; bottom: 14px; transform: translateX(-50%); font-size: 11px; color: #8b8e93; background: rgba(255,255,255,.6); padding: 4px 10px; border-radius: 999px; }
 
 /* Phones held upright: header band, 3D in the middle, text below sized to its content.
    Nothing is laid over the 3D. */
-body.portrait .scroller { height: 440vh; }
-body.portrait .top { padding: 12px 16px; gap: 10px; height: 64px; background: var(--bg); }
-body.portrait .logo svg { height: 36px; }
-body.portrait .logo b { font-size: 24px; }
-body.portrait .logo small { font-size: 8.5px; }
-body.portrait .tag, body.portrait .gauge, body.portrait .panel .hint { display: none; }
-body.portrait .langs { margin-inline-start: auto; }
-body.portrait .langs button { padding: 7px 10px; min-width: 34px; }
-body.portrait #stage { top: 64px; bottom: var(--ph, 34svh); }
+body.portrait .scroller { height: 230vh; }
+body.portrait .gauge { display: none; }
+body.portrait #stage { top: var(--h-h); bottom: var(--ph, 34svh); }
 body.portrait .panel { top: auto; bottom: 0; left: 0; right: 0; width: auto; height: var(--ph, auto); transform: none;
   padding: 18px 22px calc(18px + env(safe-area-inset-bottom)); background: #f4f4f5; border-top: 1px solid #dadbdd; }
 body.portrait .panel .k { margin-bottom: 6px; font-size: 11px; }
@@ -68,29 +50,53 @@ body.portrait .panel h1 { font-size: 26px; margin-bottom: 8px; }
 body.portrait .panel .b { font-size: 14.5px; line-height: 1.5; max-width: none; }
 body.portrait .panel .ctas { margin-top: 14px; }
 body.portrait .btn { padding: 12px 20px; }
-body.portrait .proto { bottom: auto; top: 70px; font-size: 10px; }
 
 /* Phones on their side: compact text so it fits the short screen. */
-body.short .top { padding: 10px 20px; }
-body.short .logo svg { height: 34px; } body.short .logo b { font-size: 22px; } body.short .logo small { font-size: 8px; }
-body.short .tag { display: none; }
 body.short .panel { top: 56%; width: 36vw; left: 4vw; }
 html[dir="rtl"] body.short .panel { right: 4vw; }
 body.short .panel .k { margin-bottom: 6px; font-size: 10px; }
 body.short .panel h1 { font-size: 24px; margin-bottom: 8px; }
 body.short .panel .b { font-size: 13px; line-height: 1.45; }
-body.short .panel .hint { display: none; }
 body.short .panel .ctas { margin-top: 12px; } body.short .btn { padding: 10px 16px; font-size: 13px; }
 body.short .gauge { right: 14px; bottom: 12px; }
-body.short .proto { bottom: 6px; }
 
-/* site menu on the 3D home page (button + drop-down) */
-.home-nav { position: relative; }
-.home-nav .s-menu-btn { width: 42px; height: 42px; border: 0; background: rgba(255,255,255,.85); border-radius: 50%; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; }
-.home-nav .s-menu-btn span { display: block; width: 16px; height: 2px; background: var(--ink); border-radius: 2px; }
-.home-nav .s-nav { display: none; position: absolute; top: calc(100% + 8px); inset-inline-end: 0; flex-direction: column; background: #fff; border-radius: 14px; padding: 8px; box-shadow: 0 16px 40px rgba(0,0,0,.15); min-width: 210px; z-index: 20; }
-.home-nav .s-nav.open { display: flex; }
-.home-nav .s-nav a { text-decoration: none; color: var(--grey); font-weight: 600; font-size: 15px; padding: 11px 14px; border-radius: 9px; }
-.home-nav .s-nav a:hover { background: #f1f2f3; color: var(--ink); }
-.home-nav .s-nav a.on { color: var(--o); }
-body.portrait .home-nav .s-menu-btn { width: 38px; height: 38px; background: #fff; }
+/* Brand names above the shelf bays (placed by main.js) */
+.bay-labels { position: fixed; inset: 0; z-index: 3; pointer-events: none; opacity: 0; transition: opacity .4s; }
+.bay-labels.on { opacity: 1; }
+.bay-label { position: absolute; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; gap: 2px; text-decoration: none; pointer-events: auto; transition: opacity .5s, filter .5s; white-space: nowrap; }
+.bay-label b { font: italic 800 clamp(22px, 2.3vw, 34px) Montserrat, Arial, sans-serif; letter-spacing: -.01em; line-height: 1.1; }
+.bay-label small { font-size: 12px; font-weight: 600; color: var(--grey); }
+.bay-label.total b { color: #0b7480; } .bay-label.jadever b { color: #1f7a37; }
+.bay-label.soon b { font-style: normal; font-weight: 700; font-size: clamp(18px, 1.8vw, 26px); color: #7b7d82; }
+.bay-label.soon small { color: #e2480f; letter-spacing: .02em; }
+.bay-label.dim { opacity: .45; filter: saturate(.6); }
+.bay-label.focus b { text-shadow: 0 6px 24px rgba(255,255,255,.9); }
+a.bay-label:hover b { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+html[dir="rtl"] .bay-label.soon b { font-family: Cairo, Montserrat, sans-serif; }
+
+/* Product card for a tool lifted off the shelf */
+.shelf-card { position: fixed; top: 0; left: 0; z-index: 6; width: 262px; padding: 14px; border-radius: 18px; background: rgba(255,255,255,.82); -webkit-backdrop-filter: blur(18px) saturate(1.6); backdrop-filter: blur(18px) saturate(1.6);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.8), 0 0 0 1px rgba(21,23,26,.06), 0 24px 50px -22px rgba(21,23,26,.5); opacity: 0; scale: .96; pointer-events: none; transition: opacity .2s, scale .25s cubic-bezier(.23,1,.32,1); }
+.shelf-card.in { opacity: 1; scale: 1; pointer-events: auto; }
+.shelf-card p { margin: 0; }
+.sc-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.sc-brand { font: italic 800 13px Montserrat, Arial, sans-serif; padding: 2px 8px; border-radius: 6px; }
+.sc-brand.total { background: #0b7480; color: #fff; } .sc-brand.jadever { background: #f3c300; color: #1f7a37; }
+.sc-code { font-size: 11px; font-weight: 600; color: #8b8e93; }
+.sc-name { margin-top: 10px !important; font-size: 15px; font-weight: 700; line-height: 1.3; color: #15171a; }
+.sc-price { margin-top: 6px !important; font-size: 22px; font-weight: 800; color: #15171a; text-align: start; }
+.sc-price small { font-size: 12px; font-weight: 600; color: #8b8e93; }
+.sc-cat { margin-top: 4px !important; font-size: 12.5px; color: var(--grey); }
+.sc-acts { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 12px; }
+.sc-add { border: 0; cursor: pointer; font: 700 13px Montserrat, Cairo, sans-serif; color: #fff; background: linear-gradient(#ff6a33, #e2480f); padding: 9px 14px; border-radius: 999px; white-space: nowrap; box-shadow: 0 10px 20px -10px rgba(255,90,31,.9); transition: transform .2s, filter .2s; }
+.sc-add:hover { transform: translateY(-1px); filter: brightness(1.05); }
+.sc-add.done { background: #1f7a37; box-shadow: none; }
+.sc-view { font-size: 13px; font-weight: 700; color: #e2480f; text-decoration: none; white-space: nowrap; }
+.sc-view span { display: inline-block; transition: transform .25s; }
+.sc-view:hover span { transform: translateX(3px); }
+html[dir="rtl"] .sc-view span { transform: scaleX(-1); }
+@media (prefers-reduced-motion: reduce) { .shelf-card { transition: none; } }
+
+/* Phones: the bays are narrow, so their names are short and the counts are left out. */
+body.portrait .bay-label small { display: none; }
+body.portrait .bay-label b, body.portrait .bay-label.soon b { font-size: 17px; }

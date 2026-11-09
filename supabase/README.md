@@ -34,7 +34,7 @@ contact-form messages saved, a customer order-status lookup, and a place for the
 3. **Project Settings → API**: copy the Project URL and the `anon` public key.
 4. In the website folder, copy `.env.example` to `.env.local` and paste both values.
 5. Restart the dev server (`npm run dev`). The shop now loads products from Supabase and saves orders.
-6. Add an admin (needed to sign in at `/admin.html`): **Authentication → Users → Add user**, copy their user id, then in SQL Editor:
+6. Add an admin (needed to sign in at `/admin`): **Authentication → Users → Add user**, copy their user id, then in SQL Editor:
    `insert into public.staff (user_id, name, role) values ('<user id>', 'Name', 'admin');`
 
 With the Supabase CLI instead: `supabase link --project-ref <ref>` then `supabase db push` and `supabase db reset` (local) or run `seed.sql`.
@@ -44,7 +44,7 @@ With the Supabase CLI instead: `supabase link --project-ref <ref>` then `supabas
 To finish it we need DAR's Whish merchant account and Whish's merchant API documentation.
 Payments must be marked as paid only from Whish's verified server callback, never from the browser.
 
-## Admin panel (`/admin.html`)
+## Admin panel (`/admin`)
 Orders (live alerts, status, payment, delivery fee, WhatsApp/call the customer), messages, products (add, edit, photo upload, price, stock, show/hide) and website settings (WhatsApp number, Instagram, Facebook, TikTok, opening hours). Only users in `public.staff` can sign in.
 Tip: in Authentication settings, turn off public sign-ups so only accounts you create exist.
 

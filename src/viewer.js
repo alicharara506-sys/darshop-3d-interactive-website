@@ -1,18 +1,12 @@
-<!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>3D model check</title>
-<style>html,body{margin:0;height:100%;background:#e6e7e9;font:14px Arial}#c{width:100%;height:100%;display:block}#l{position:fixed;top:10px;left:10px}</style>
-</head><body><div id="l"></div><canvas id="c"></canvas>
-<script type="module">
-// QA page: /viewer.html?m=drill&a=40  (a = fixed turn in degrees; omit to auto-rotate)
+// QA page: /viewer?m=drill&a=40  (a = fixed turn in degrees; omit to auto-rotate)
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
-import { patchLabels, DRILL_PATCHES } from '/src/tools.js';
+import { patchLabels, DRILL_PATCHES } from './tools.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 const q = new URLSearchParams(location.search), name = q.get('m') || 'drill';
 document.getElementById('l').textContent = name;
-const r = new THREE.WebGLRenderer({ canvas: c, antialias: true }); r.setPixelRatio(devicePixelRatio);
+const r = new THREE.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true }); r.setPixelRatio(devicePixelRatio);
 r.toneMapping = THREE.ACESFilmicToneMapping;
 const s = new THREE.Scene(); s.background = new THREE.Color(0xe6e7e9);
 s.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(), 0.04).texture;
@@ -35,4 +29,3 @@ const t0 = performance.now();
   if (obj) obj.rotation.y = q.has('a') ? THREE.MathUtils.degToRad(+q.get('a')) : Math.sin((performance.now() - t0) / 1500) * 1.0;
   r.render(s, cam); requestAnimationFrame(loop);
 })();
-</script></body></html>

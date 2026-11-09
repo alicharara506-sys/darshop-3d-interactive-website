@@ -1,0 +1,62 @@
+/* Tailwind's theme and utilities only. Its reset is left out on purpose: the shop, info and
+   admin pages are still styled by their own CSS files, and the reset would change them. */
+@layer theme, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme {
+  --color-brand: #ff5a1f;
+  --color-brand-deep: #e2480f;
+  --color-brand-soft: #ff9a3d;
+  --color-ink: #15171a;
+  --color-steel: #5d6066;
+  --color-total: #0b7480;
+  --color-jadever: #1f7a37;
+  --color-jadever-yellow: #f3c300;
+}
+
+/* The 3D home page's layout classes (set on <body> by main.js) */
+@custom-variant tall (body.portrait &);
+@custom-variant squat (body.short &);
+
+/* ---------- home hero: the entrance is CSS, so it plays as soon as the page arrives ---------- */
+:root { --hero-ease: cubic-bezier(.2, .8, .2, 1); }
+@layer utilities {
+  .hero-up, .hero-word, .hero-type, .hero-line, .hero-tick { animation-delay: calc(var(--i, 0) * var(--hero-step, 70ms)); animation-fill-mode: both; }
+  .hero-up { animation-name: hero-up; animation-duration: .8s; animation-timing-function: var(--hero-ease); }
+  .hero-word { animation-name: hero-word; animation-duration: 1s; animation-timing-function: var(--hero-ease); }
+  .hero-type { animation-name: hero-type; animation-duration: 1.1s; animation-timing-function: steps(28); }
+  [dir='rtl'] .hero-type { animation-name: hero-type-rtl; }
+  .hero-line { animation-name: hero-line; animation-duration: 1.1s; animation-timing-function: var(--hero-ease); transform-origin: left; }
+  [dir='rtl'] .hero-line { transform-origin: right; }
+  .hero-tick { animation-name: hero-tick; animation-duration: .45s; animation-timing-function: var(--hero-ease); transform-origin: top; }
+  .hero-flow { background-image: linear-gradient(90deg, #ff5a1f, #ff9a3d, #e2480f, #ff5a1f); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: hero-flow 7s linear infinite; }
+  .hero-streak { animation: hero-streak 5s ease-in-out 1.8s infinite; }
+  .hero-glide { animation: hero-glide 5s ease-in-out 1.6s infinite; }
+  .hero-ping { animation: hero-ping 2s cubic-bezier(0, 0, .2, 1) infinite; }
+  .hero-breathe { animation: hero-breathe 9s ease-in-out infinite; }
+  .hero-bar { animation: hero-bar .35s var(--hero-ease) both; animation-delay: calc(var(--i, 0) * 70ms); transform-origin: bottom; }
+  .hero-laser { inset-inline-start: 0; animation: hero-laser 2.6s ease-in-out infinite both; }
+  .hero-dwell { animation-name: hero-dwell; animation-timing-function: linear; animation-fill-mode: both; transform-origin: left; }
+  [dir='rtl'] .hero-dwell { transform-origin: right; }
+}
+@keyframes hero-up { from { opacity: 0; transform: translateY(16px); filter: blur(6px); } }
+@keyframes hero-word { from { transform: translateY(112%) rotate(4deg); opacity: .2; } }
+@keyframes hero-type { from { clip-path: inset(-20% 100% -20% 0); } to { clip-path: inset(-20% 0 -20% 0); } }
+@keyframes hero-type-rtl { from { clip-path: inset(-20% 0 -20% 100%); } to { clip-path: inset(-20% 0 -20% 0); } }
+@keyframes hero-line { from { transform: scaleX(0); } }
+@keyframes hero-tick { from { transform: scaleY(0); opacity: 0; } }
+@keyframes hero-flow { to { background-position: -300% 0; } }
+@keyframes hero-streak { 0%, 62% { transform: translateX(-160%) skewX(-18deg); } 100% { transform: translateX(460%) skewX(-18deg); } }
+@keyframes hero-glide { 0%, 100% { inset-inline-start: 0; } 50% { inset-inline-start: calc(100% - 8px); } }
+@keyframes hero-ping { 75%, 100% { transform: scale(2.6); opacity: 0; } }
+@keyframes hero-breathe { 50% { transform: scale(1.12); opacity: .75; } }
+@keyframes hero-bar { from { transform: scaleY(0); } }
+@keyframes hero-laser { 0% { inset-inline-start: 0; opacity: 0; } 8% { opacity: 1; } 50% { inset-inline-start: calc(100% - 2px); } 92% { opacity: 1; } 100% { inset-inline-start: 0; opacity: 0; } }
+@keyframes hero-dwell { from { transform: scaleX(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-up, .hero-word, .hero-type, .hero-line, .hero-tick, .hero-flow, .hero-streak, .hero-glide, .hero-ping, .hero-breathe, .hero-dwell, .hero-bar, .hero-laser { animation: none !important; }
+}
+
+/* Tailwind's reset is off (see top), so buttons take the page's font explicitly */
+#shelfPanel button, #heroCopy button { font-family: inherit; }

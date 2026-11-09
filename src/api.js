@@ -1,12 +1,12 @@
 // Supabase connection for the shop.
-// Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in .env.local (see .env.example).
+// Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local (see .env.example).
 // Without them the site keeps working on the local catalogue (data/*.json) and
 // WhatsApp-only orders, so the prototype never breaks.
 // Only the PUBLIC anon key goes here. Never put the service_role key in the website.
 import { createClient } from '@supabase/supabase-js';
 
-const URL = import.meta.env.VITE_SUPABASE_URL;
-const KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 export const supabase = URL && KEY ? createClient(URL, KEY, { auth: { persistSession: false } }) : null;
 export const LIVE = Boolean(supabase);
 

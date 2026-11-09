@@ -1,184 +1,8 @@
-// Stand-in 3D tools in a glossy studio style.
-// PROTOTYPE ONLY: these are simple shapes in the brand colours, not the real
-// TOTAL / Jadever products. They will be replaced by models of the real items.
+// The tools in the 3D home scene, built from real TOTAL and Jadever product photos.
 import * as THREE from 'three';
-import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry.js';
-
-export const C = {
-  teal: 0x12a3b0, tealDark: 0x0b7480, grey: 0xb9bec4, red: 0xd8262c,
-  green: 0x1f7a37, yellow: 0xf3c300, black: 0x1a1b1d, steel: 0xd0d4d9, gold: 0xc9a13b,
-};
-
-const gloss = (color, o = {}) => new THREE.MeshPhysicalMaterial({ color, roughness: 0.32, clearcoat: 1, clearcoatRoughness: 0.12, ...o });
-const M = {
-  teal: gloss(C.teal), tealDark: gloss(C.tealDark), grey: gloss(C.grey), red: gloss(C.red),
-  green: gloss(C.green), yellow: gloss(C.yellow), black: gloss(C.black, { roughness: 0.6, clearcoat: 0.3 }),
-  steel: new THREE.MeshPhysicalMaterial({ color: C.steel, metalness: 1, roughness: 0.22 }),
-  gold: new THREE.MeshPhysicalMaterial({ color: C.gold, metalness: 1, roughness: 0.3 }),
-};
-
-function box(w, h, d, mat, r = 0.04) {
-  return new THREE.Mesh(new RoundedBoxGeometry(w, h, d, 4, Math.min(r, w / 2.1, h / 2.1, d / 2.1)), mat);
-}
-function cyl(r, h, mat, seg = 32) { return new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, seg), mat); }
-function at(m, x, y, z, rx = 0, ry = 0, rz = 0) { m.position.set(x, y, z); m.rotation.set(rx, ry, rz); return m; }
-
-// A flat brand label on a tool. Brand names only, as plain text, until the
-// official logo files arrive from the partners.
-function label(text, bg, fg, w, h) {
-  const cv = document.createElement('canvas');
-  cv.width = 512; cv.height = Math.round(512 * h / w);
-  const g = cv.getContext('2d');
-  g.fillStyle = bg; g.fillRect(0, 0, cv.width, cv.height);
-  g.fillStyle = fg; g.textAlign = 'center'; g.textBaseline = 'middle';
-  g.font = `italic 800 ${Math.round(cv.height * 0.62)}px Montserrat, Arial, sans-serif`;
-  g.fillText(text, cv.width / 2, cv.height / 2 + 2);
-  const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
-  return new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshPhysicalMaterial({ map: tex, roughness: 0.3, clearcoat: 1 }));
-}
-const totalLabel = (w, h) => label('TOTAL', '#ffffff', '#0b7480', w, h);
-const jadLabel = (w, h) => label('Jadever', '#f3c300', '#1f7a37', w, h);
-
-function both(g, mk, z) { const a = mk(); a.position.z = z; g.add(a); const b = mk(); b.position.z = -z; b.rotation.y = Math.PI; g.add(b); }
-
-function drill(len = 0.9, bodyMat = M.teal) {
-  const g = new THREE.Group();
-  g.add(at(box(len, 0.32, 0.26, bodyMat, 0.1), 0, 0.36, 0));
-  g.add(at(box(0.2, 0.3, 0.27, M.grey, 0.08), -len / 2 - 0.02, 0.36, 0));
-  g.add(at(box(0.22, 0.56, 0.21, M.black, 0.08), -0.05, 0.02, 0, 0, 0, 0.14));
-  g.add(at(box(0.46, 0.17, 0.3, M.tealDark, 0.05), -0.04, -0.32, 0));
-  g.add(at(box(0.07, 0.1, 0.08, M.red, 0.02), 0.08, 0.17, 0));
-  g.add(at(cyl(0.09, 0.2, M.black), len / 2 + 0.1, 0.36, 0, 0, 0, Math.PI / 2));
-  g.add(at(cyl(0.022, 0.34, M.steel, 12), len / 2 + 0.36, 0.36, 0, 0, 0, Math.PI / 2));
-  both(g, () => at(totalLabel(0.36, 0.11), 0.08, 0.37, 0), 0.132);
-  return g;
-}
-function grinder() {
-  const g = new THREE.Group();
-  g.add(at(cyl(0.15, 0.85, M.teal), 0, 0, 0, 0, 0, Math.PI / 2));
-  g.add(at(box(0.3, 0.26, 0.26, M.grey, 0.08), 0.52, 0.02, 0));
-  g.add(at(cyl(0.34, 0.02, M.steel, 48), 0.56, -0.2, 0));
-  g.add(at(new THREE.Mesh(new THREE.CylinderGeometry(0.37, 0.37, 0.08, 40, 1, true, 0, Math.PI), M.grey), 0.56, -0.16, 0, 0, Math.PI / 2, 0));
-  g.add(at(cyl(0.05, 0.36, M.black), 0.5, 0.25, 0, Math.PI / 2, 0, 0));
-  g.add(at(box(0.18, 0.08, 0.12, M.red, 0.03), -0.1, 0.15, 0));
-  both(g, () => at(totalLabel(0.34, 0.1), -0.1, 0, 0), 0.152);
-  return g;
-}
-function blade() {
-  const g = new THREE.Group();
-  const d = at(cyl(0.5, 0.02, M.steel, 64), 0, 0, 0, Math.PI / 2, 0, 0); g.add(d);
-  for (let i = 0; i < 36; i++) {
-    const a = (i / 36) * Math.PI * 2;
-    g.add(at(new THREE.Mesh(new THREE.ConeGeometry(0.035, 0.07, 3), M.steel), Math.cos(a) * 0.52, Math.sin(a) * 0.52, 0, 0, 0, a - Math.PI / 2 - 0.4));
-  }
-  g.add(at(cyl(0.3, 0.025, M.teal, 48), 0, 0, 0, Math.PI / 2, 0, 0));
-  g.add(at(cyl(0.06, 0.03, M.grey, 24), 0, 0, 0, Math.PI / 2, 0, 0));
-  both(g, () => at(totalLabel(0.3, 0.09), 0, 0.14, 0), 0.014);
-  return g;
-}
-function battery() {
-  const g = new THREE.Group();
-  g.add(box(0.6, 0.22, 0.4, M.teal, 0.06));
-  g.add(at(box(0.62, 0.08, 0.42, M.black, 0.03), 0, -0.13, 0));
-  g.add(at(box(0.3, 0.06, 0.2, M.grey, 0.02), 0, 0.13, 0));
-  both(g, () => at(totalLabel(0.34, 0.1), 0, 0.01, 0), 0.201);
-  return g;
-}
-function screwdriver(handle = M.green) {
-  const g = new THREE.Group();
-  g.add(at(cyl(0.075, 0.38, handle, 6), -0.3, 0, 0, 0, 0, Math.PI / 2));
-  g.add(at(cyl(0.08, 0.06, M.yellow, 6), -0.1, 0, 0, 0, 0, Math.PI / 2));
-  g.add(at(cyl(0.018, 0.5, M.steel, 12), 0.2, 0, 0, 0, 0, Math.PI / 2));
-  g.add(at(box(0.05, 0.035, 0.012, M.steel, 0.004), 0.47, 0, 0));
-  return g;
-}
-function tape() {
-  const g = new THREE.Group();
-  g.add(box(0.5, 0.5, 0.2, M.yellow, 0.14));
-  g.add(at(box(0.36, 0.36, 0.22, M.green, 0.1), 0, 0, 0));
-  g.add(at(box(0.08, 0.04, 0.16, M.yellow, 0.01), 0.27, -0.2, 0));
-  g.add(at(box(0.04, 0.08, 0.17, M.black, 0.01), 0.31, -0.18, 0));
-  both(g, () => at(jadLabel(0.3, 0.09), 0, 0.02, 0), 0.111);
-  return g;
-}
-function pliers() {
-  const g = new THREE.Group();
-  const h1 = at(new THREE.Mesh(new THREE.CapsuleGeometry(0.045, 0.6, 6, 12), M.green), -0.09, -0.3, 0, 0, 0, 0.16);
-  const h2 = at(new THREE.Mesh(new THREE.CapsuleGeometry(0.045, 0.6, 6, 12), M.yellow), 0.09, -0.3, 0, 0, 0, -0.16);
-  g.add(h1, h2);
-  g.add(at(box(0.07, 0.3, 0.05, M.steel, 0.02), -0.03, 0.2, 0.0, 0, 0, -0.08));
-  g.add(at(box(0.07, 0.3, 0.05, M.steel, 0.02), 0.03, 0.2, 0.03, 0, 0, 0.08));
-  g.add(at(cyl(0.05, 0.12, M.steel, 20), 0, 0.06, 0.02, Math.PI / 2, 0, 0));
-  return g;
-}
-function toolbox() {
-  const g = new THREE.Group();
-  g.add(box(0.95, 0.55, 0.32, M.green, 0.06));
-  g.add(at(box(0.97, 0.03, 0.34, M.black, 0.01), 0, 0.1, 0));
-  g.add(at(new THREE.Mesh(new THREE.TorusGeometry(0.17, 0.035, 12, 24, Math.PI), M.yellow), 0, 0.28, 0));
-  for (const x of [-0.32, 0.32]) g.add(at(box(0.1, 0.12, 0.05, M.yellow, 0.02), x, 0.1, 0.17));
-  g.add(at(jadLabel(0.46, 0.13), 0, -0.1, 0.162));
-  return g;
-}
-function level() {
-  const g = new THREE.Group();
-  g.add(box(1.2, 0.14, 0.07, M.yellow, 0.02));
-  for (const x of [-0.58, 0.58]) g.add(at(box(0.08, 0.16, 0.09, M.green, 0.02), x, 0, 0));
-  g.add(at(cyl(0.03, 0.14, new THREE.MeshPhysicalMaterial({ color: 0x7ee08a, transmission: 0.6, roughness: 0.1 }), 16), 0, 0, 0, 0, 0, Math.PI / 2));
-  both(g, () => at(jadLabel(0.28, 0.08), -0.3, 0, 0), 0.036);
-  return g;
-}
-function wrench() {
-  const g = new THREE.Group();
-  g.add(box(0.75, 0.1, 0.05, M.steel, 0.02));
-  g.add(at(box(0.36, 0.11, 0.06, M.green, 0.03), -0.22, 0, 0));
-  g.add(at(box(0.2, 0.26, 0.06, M.steel, 0.03), 0.42, 0.04, 0));
-  g.add(at(box(0.1, 0.08, 0.07, M.steel, 0.01), 0.52, 0.18, 0));
-  g.add(at(cyl(0.035, 0.08, M.gold, 16), 0.36, -0.04, 0, Math.PI / 2, 0, 0));
-  return g;
-}
-function bits() {
-  const g = new THREE.Group();
-  g.add(box(0.7, 0.4, 0.12, M.green, 0.04));
-  for (let i = 0; i < 9; i++) g.add(at(cyl(0.018, 0.26 - i * 0.012, i % 2 ? M.gold : M.steel, 10), -0.28 + i * 0.07, 0, 0.08));
-  g.add(at(new THREE.Mesh(new RoundedBoxGeometry(0.68, 0.38, 0.04, 3, 0.02), new THREE.MeshPhysicalMaterial({ color: 0xffffff, transmission: 1, roughness: 0.05, thickness: 0.05 })), 0, 0, 0.12));
-  g.add(at(box(0.7, 0.08, 0.13, M.yellow, 0.02), 0, -0.2, 0));
-  return g;
-}
-
-// Each tool: id (for the name lookup), brand, builder.
-const LIST = [
-  ['toolbox', 'jadever', toolbox],
-  ['tape', 'jadever', tape],
-  ['screwdriver', 'jadever', () => screwdriver(M.green)],
-  ['pliers', 'jadever', pliers],
-  ['level', 'jadever', level],
-  ['wrench', 'jadever', wrench],
-  ['bits', 'jadever', bits],
-  ['screwdriver', 'jadever', () => screwdriver(M.yellow)],
-];
-
-// Builds the stand-in tools (Jadever for now), centred and scaled so the longest side is 1.
-export function buildTools() {
-  return LIST.map(([id, brand, make]) => {
-    const inner = make();
-    const bb = new THREE.Box3().setFromObject(inner);
-    const size = bb.getSize(new THREE.Vector3());
-    const ctr = bb.getCenter(new THREE.Vector3());
-    inner.position.sub(ctr);
-    const norm = new THREE.Group();
-    norm.add(inner);
-    norm.scale.setScalar(1 / Math.max(size.x, size.y, size.z));
-    const g = new THREE.Group();
-    g.add(norm);
-    g.traverse(o => { if (o.isMesh) { o.castShadow = true; o.userData.tool = g; } });
-    g.userData = { id, brand, aspectH: size.y / Math.max(size.x, size.y, size.z) };
-    return g;
-  });
-}
 
 // Real TOTAL product photos (transparent cut-outs from the TOTAL catalogue),
 // shown as flat cards in the 3D scene. Order = shelf slots, bottom row first.
@@ -187,10 +11,19 @@ const TOTAL_PHOTOS = [
   ['drill', 408, 496], ['grinder', 488, 332], ['impactWrench', 318, 498],
   ['battery', 332, 239], ['charger', 343, 271], ['blower', 478, 233],
 ];
+// Where each one leads in the shop: a search when the catalogue has matching products,
+// otherwise its category.
+const TOTAL_CAT = { breaker: 'power', hammer: 'power', impactDrill: 'power', drill: 'power', grinder: 'power', impactWrench: 'power', battery: 'accessories', charger: 'accessories', blower: 'power' };
+const TOTAL_SHOP = {
+  drill: { q: 'drill' }, hammer: { q: 'rotary hammer' }, grinder: { q: 'grinder' }, impactDrill: { q: 'impact drill' },
+  charger: { q: 'charger' }, blower: { q: 'blower' }, breaker: { cat: 'power' }, impactWrench: { cat: 'power' }, battery: { cat: 'accessories' },
+};
+// Model codes in the catalogue, for prices on the shelf.
+const TOTAL_CODE = { drill: 'TDLI200528', hammer: 'TH308268', grinder: 'TG513326', impactDrill: 'TIDLI209681', charger: 'TFCLI2001', blower: 'TABLI200181' };
 const loader = new THREE.TextureLoader();
 const gltf = new GLTFLoader().setDRACOLoader(new DRACOLoader().setDecoderPath('/draco/'));
 // Real TOTAL artwork stuck over the AI model's garbled text, on both sides.
-// y, z, w, h are in the raw model's units (measured in /viewer.html?src=hf).
+// y, z, w, h are in the raw model's units (measured in /viewer?src=hf).
 export const DRILL_PATCHES = [
   { img: '/products/total/decals/drill_logo.png', y: 0.333, z: 0.173, w: 0.23, h: 0.075 },
   { img: '/products/total/decals/drill_label.png', y: -0.39, z: 0.166, w: 0.42, h: 0.17 },
@@ -235,7 +68,7 @@ export function buildPhotoCards(maxAniso = 8) {
     const g = new THREE.Group();
     g.add(mesh);
     mesh.userData.tool = g;
-    g.userData = { id, brand: 'total', card: true, aspectH: h / m };
+    g.userData = { id, brand: 'total', card: true, aspectH: h / m, fill: Math.min(w, h) / m, cat: TOTAL_CAT[id], shop: TOTAL_SHOP[id], code: TOTAL_CODE[id] };
     // Swap the flat photo for the Blender model (same photo, with real depth)
     // once it has loaded. Built by tools/blender_photo_to_3d.py.
     // The drill uses the Higgsfield (Tripo) model with the real TOTAL logo patched on.
@@ -258,7 +91,73 @@ export function buildPhotoCards(maxAniso = 8) {
       });
       g.remove(mesh); mesh.geometry.dispose();
       g.add(model);
-    });
+      g.userData.ready = true;
+    }, undefined, () => { g.userData.ready = true; });
+    return g;
+  });
+}
+
+// Real Jadever product photos, cut out by tools/cut_jadever_photos.py:
+// [code, catalogue id, name, category, width, height]. Order = shelf slots, bottom row first.
+const JADEVER_PHOTOS = [
+  ['JDFA55350', 'jadever-orbital-sander-350w-jadever-jdfa55350', 'Orbital Sander 350W', 'power', 490, 297],
+  ['JDRYP1504', 'jadever-mini-grinder-jadever-jdryp1504', 'Mini Grinder', 'power', 430, 312],
+  ['JDWB1F01', 'jadever-wheelbarrow-jadever-jdwb1f01', 'Wheelbarrow', 'construction', 485, 325],
+  ['JDLYP546', 'jadever-cordless-hedge-trimmer-20v-jadever-jdlyp546', 'Cordless Hedge Trimmer 20V', 'garden', 494, 254],
+  ['JDWH2501', 'jadever-auto-darkening-welding-helmet-jadever-jdwh2501', 'Auto-Darkening Welding Helmet', 'welding', 491, 609],
+  ['JDGA4611', 'jadever-plastic-air-blow-gun-jadever-jdga4611', 'Plastic Air Blow Gun', 'air', 170, 361],
+  ['JDSS1302', 'jadever-2-piece-screwdriver-set-jadever-jdss1302', '2-Piece Screwdriver Set', 'hand', 322, 308],
+  ['JDCV4401', 'jadever-cordless-screwdriver-jadever-jdcv4401', 'Cordless Screwdriver', 'power', 377, 299],
+];
+// Gives a flat cut-out photo real depth: the surface swells from its outline, thickest in the
+// middle and rounded at the edge, like tools/blender_photo_to_3d.py but built in the browser.
+function inflate(image, w, h, depth = 0.09) {
+  const cols = 90, rows = Math.max(12, Math.round(cols * (h / w)));
+  const cv = document.createElement('canvas'); cv.width = cols + 1; cv.height = rows + 1;
+  const g = cv.getContext('2d', { willReadFrequently: true });
+  g.drawImage(image, 0, 0, cols + 1, rows + 1);
+  const alpha = g.getImageData(0, 0, cols + 1, rows + 1).data;
+  // Distance of every point from the outline (two sweeps across the grid).
+  const W = cols + 1, H = rows + 1, far = 1e6, dist = new Float32Array(W * H);
+  for (let i = 0; i < W * H; i++) dist[i] = alpha[i * 4 + 3] > 90 ? far : 0;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const i = y * W + x;
+    if (x > 0) dist[i] = Math.min(dist[i], dist[i - 1] + 1);
+    if (y > 0) dist[i] = Math.min(dist[i], dist[i - W] + 1);
+  }
+  for (let y = H - 1; y >= 0; y--) for (let x = W - 1; x >= 0; x--) {
+    const i = y * W + x;
+    if (x < W - 1) dist[i] = Math.min(dist[i], dist[i + 1] + 1);
+    if (y < H - 1) dist[i] = Math.min(dist[i], dist[i + W] + 1);
+  }
+  const geo = new THREE.PlaneGeometry(w, h, cols, rows), pos = geo.attributes.position, reach = Math.max(4, cols * 0.13);
+  for (let i = 0; i < pos.count; i++) {
+    const t = Math.min(1, dist[i] / reach);
+    pos.setZ(i, Math.sqrt(1 - (1 - t) * (1 - t)) * depth);
+  }
+  geo.computeVertexNormals();
+  return geo;
+}
+export function buildJadeverCards(maxAniso = 8) {
+  return JADEVER_PHOTOS.map(([code, productId, name, cat, w, h]) => {
+    const m = Math.max(w, h), g = new THREE.Group();
+    const flat = new THREE.PlaneGeometry(w / m, h / m);
+    const mat = new THREE.MeshBasicMaterial({ transparent: true, alphaTest: 0.5, side: THREE.DoubleSide, toneMapped: false });
+    const mesh = new THREE.Mesh(flat, mat);
+    mesh.userData.tool = g;
+    g.add(mesh);
+    g.userData = { id: code, name, cat, brand: 'jadever', card: true, aspectH: h / m, fill: Math.min(w, h) / m, shop: { open: productId } };
+    loader.load(`/products/jadever/${code}.png`, (tex) => {
+      tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = maxAniso;
+      const solid = new THREE.MeshStandardMaterial({ map: tex, transparent: true, alphaTest: 0.5, side: THREE.DoubleSide, roughness: 0.45, metalness: 0, envMapIntensity: 0.55, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.06 });
+      const depth = new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking, map: tex, alphaTest: 0.5 });
+      const geo = inflate(tex.image, w / m, h / m);
+      const front = new THREE.Mesh(geo, solid), back = new THREE.Mesh(geo, solid);
+      back.scale.z = -1;
+      for (const part of [front, back]) { part.castShadow = true; part.customDepthMaterial = depth; part.userData.tool = g; g.add(part); }
+      g.remove(mesh); flat.dispose(); mat.dispose();
+      g.userData.ready = true;
+    }, undefined, () => { g.userData.ready = true; });
     return g;
   });
 }
