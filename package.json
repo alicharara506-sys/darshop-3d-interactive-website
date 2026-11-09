@@ -4,15 +4,24 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 3230 --strictPort --host",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "next dev --port 3230 --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start --port 3230"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.119.0",
+    "motion": "^14.11.0",
+    "next": "16.4.5",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
     "three": "^0.170.0"
   },
   "devDependencies": {
-    "vite": "^6.0.7"
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "22.19.9",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "tailwindcss": "^4.3.5",
+    "typescript": "5.7.3"
   }
 }

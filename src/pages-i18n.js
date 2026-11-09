@@ -4,7 +4,7 @@
 export const PAGE = {
   en: {
     about: {
-      kicker: 'About DAR', title: 'Tools you can trust, from people who build',
+      kicker: 'About DAR', title: 'Tools you can trust, from people who build', promiseH: 'Our promise', wordType: 'noun', wordNote: 'Arabic for “home”. We build them, and we sell the tools to build yours.',
       intro: 'DAR Building Materials Shop is the tools and materials shop of DAR Trading & Contracting, at Sfeir Raya Center in Beirut.',
       storyH: 'Our story',
       story: ['“Dar” means home in Arabic. DAR Trading & Contracting builds and finishes homes across Lebanon on one promise: Results First. Payment Follows.',
@@ -15,7 +15,7 @@ export const PAGE = {
       ctaShop: 'Shop now', ctaContact: 'Contact us',
     },
     faq: {
-      kicker: 'Help', title: 'Frequently asked questions', intro: 'Quick answers about ordering, delivery, payment and warranty. Can’t find your answer? Message us on WhatsApp.',
+      kicker: 'Help', title: 'Frequently asked questions', intro: 'Quick answers about ordering, delivery, payment and warranty. Can’t find your answer? Message us on WhatsApp.', title2: 'Questions, answered.', searchPh: 'Search delivery, warranty, batteries…', topics: 'Topics', count: n => `${n} questions`, found: n => `${n} matching`, groups: { order: 'Ordering', payment: 'Payment & prices', delivery: 'Delivery & pickup', products: 'Products & warranty', business: 'Contractors' }, helpful: 'Was this helpful?', yes: 'Yes', no: 'No', thanks: 'Thanks for telling us!', copy: 'Copy link', copied: 'Link copied ✓',
       items: [
         ['How do I place an order?', 'Add products to your order, tap Checkout, enter your details and choose Order on WhatsApp or Pay online with Whish. We confirm stock, delivery and the final price on WhatsApp.'],
         ['Which payment methods do you accept?', 'Cash on delivery, payment in store, or online with Whish. Card payments: to confirm.'],
@@ -30,7 +30,7 @@ export const PAGE = {
       ],
     },
     support: {
-      kicker: 'Support', title: 'We’re here to help', intro: 'Choose what you need help with. The fastest way to reach us is WhatsApp.',
+      kicker: 'Support', title: 'We’re here to help', intro: 'Choose what you need help with. The fastest way to reach us is WhatsApp.', title2: 'How can we help?', searchPh: 'Search orders, warranty, returns…', popular: 'Popular:', trackH: 'Track your order', trackBody: 'Enter the order number from your confirmation and the phone you used.', trackRef: 'Order number', trackPhone: 'Phone number', trackBtn: 'Track', trackIdle: 'Your order’s progress will show here.', trackLooking: 'Looking up your order…', trackBadRef: 'Order numbers look like DAR-261105-AB12.', trackNotFound: 'We couldn’t find that order. Check the number and phone, or ask us on WhatsApp.', trackCancelled: 'This order was cancelled. Message us if this is a mistake.', trackOffline: 'Live tracking is coming soon. Send us your order number and we will check it for you.', steps: { new: 'Received', confirmed: 'Confirmed', ready: 'Ready', out_for_delivery: 'On the way', completed: 'Delivered' }, askWa: 'Ask on WhatsApp', faqH: 'Popular questions', none: 'Nothing matches that search. Ask us on WhatsApp instead.', stillH: 'Still need help?', stillBody: 'Our team in Beirut answers on WhatsApp, usually within the day.',
       cards: [
         ['order', 'Order help', 'Questions about an order? Send us your order number (for example DAR-261105-AB12) on WhatsApp and we will check it for you.'],
         ['warranty', 'Warranty and repairs', 'Bring or send us the product, a photo of its packaging and serial label, and your invoice. We handle the claim with TOTAL or Jadever for you.'],
@@ -41,7 +41,7 @@ export const PAGE = {
       chat: 'Chat on WhatsApp', form: 'Use the contact form', faq: 'Read the FAQ',
     },
     contact: {
-      kicker: 'Contact', title: 'Contact us', intro: 'Visit the shop, message us on WhatsApp, or send us your question below.',
+      kicker: 'Contact', title: 'Contact us', title2: 'Let’s talk.', intro: 'Tell us what you need. Your message goes straight to our team on WhatsApp, and you can see it before you send it.', namePh: 'Your name', msgPh: 'Write your message…', online: 'Usually replies within the day', today: 'Today', greet: 'Hello! How can we help you today? 👋',
       shopH: 'The shop', address: 'Sfeir Raya Center, Beirut, Lebanon', map: 'Open in Google Maps', hoursH: 'Opening hours', hours: 'Monday to Saturday · hours to confirm',
       waH: 'WhatsApp', waBody: 'The fastest way to reach us.', waBtn: 'Chat on WhatsApp', followH: 'Follow us',
       formH: 'Send us a message', name: 'Full name', phone: 'Phone number', subject: 'Subject', message: 'Your message',
@@ -53,7 +53,7 @@ export const PAGE = {
   },
   fr: {
     about: {
-      kicker: 'À propos de DAR', title: 'Des outils fiables, par des gens qui construisent',
+      kicker: 'À propos de DAR', title: 'Des outils fiables, par des gens qui construisent', promiseH: 'Notre promesse', wordType: 'nom', wordNote: '« Maison » en arabe. Nous en construisons, et nous vendons les outils pour construire la vôtre.',
       intro: 'DAR Building Materials Shop est la boutique d’outils et de matériaux de DAR Trading & Contracting, au Sfeir Raya Center à Beyrouth.',
       storyH: 'Notre histoire',
       story: ['« Dar » signifie maison en arabe. DAR Trading & Contracting construit et finit des maisons partout au Liban avec une promesse : les résultats d’abord, le paiement ensuite.',
@@ -64,7 +64,7 @@ export const PAGE = {
       ctaShop: 'Voir la boutique', ctaContact: 'Nous contacter',
     },
     faq: {
-      kicker: 'Aide', title: 'Questions fréquentes', intro: 'Réponses rapides sur la commande, la livraison, le paiement et la garantie. Pas de réponse ? Écrivez-nous sur WhatsApp.',
+      kicker: 'Aide', title: 'Questions fréquentes', intro: 'Réponses rapides sur la commande, la livraison, le paiement et la garantie. Pas de réponse ? Écrivez-nous sur WhatsApp.', title2: 'Vos questions, nos réponses.', searchPh: 'Rechercher livraison, garantie, batteries…', topics: 'Sujets', count: n => `${n} questions`, found: n => `${n} résultat${n === 1 ? '' : 's'}`, groups: { order: 'Commander', payment: 'Paiement et prix', delivery: 'Livraison et retrait', products: 'Produits et garantie', business: 'Professionnels' }, helpful: 'Cette réponse vous a aidé ?', yes: 'Oui', no: 'Non', thanks: 'Merci pour votre retour !', copy: 'Copier le lien', copied: 'Lien copié ✓',
       items: [
         ['Comment passer commande ?', 'Ajoutez des produits à votre commande, appuyez sur Commander, saisissez vos coordonnées et choisissez WhatsApp ou Whish. Nous confirmons le stock, la livraison et le prix final sur WhatsApp.'],
         ['Quels moyens de paiement acceptez-vous ?', 'Paiement à la livraison, en boutique ou en ligne avec Whish. Paiement par carte : à confirmer.'],
@@ -79,7 +79,7 @@ export const PAGE = {
       ],
     },
     support: {
-      kicker: 'Assistance', title: 'Nous sommes là pour vous aider', intro: 'Choisissez votre besoin. Le plus rapide pour nous joindre est WhatsApp.',
+      kicker: 'Assistance', title: 'Nous sommes là pour vous aider', intro: 'Choisissez votre besoin. Le plus rapide pour nous joindre est WhatsApp.', title2: 'Comment pouvons-nous aider ?', searchPh: 'Rechercher commandes, garantie, retours…', popular: 'Fréquent :', trackH: 'Suivre votre commande', trackBody: 'Saisissez le numéro de commande et le téléphone utilisé.', trackRef: 'Numéro de commande', trackPhone: 'Téléphone', trackBtn: 'Suivre', trackIdle: 'L’avancement de votre commande s’affichera ici.', trackLooking: 'Recherche de votre commande…', trackBadRef: 'Un numéro de commande ressemble à DAR-261105-AB12.', trackNotFound: 'Commande introuvable. Vérifiez le numéro et le téléphone, ou écrivez-nous sur WhatsApp.', trackCancelled: 'Cette commande a été annulée. Écrivez-nous en cas d’erreur.', trackOffline: 'Le suivi en direct arrive bientôt. Envoyez-nous votre numéro de commande et nous vérifions pour vous.', steps: { new: 'Reçue', confirmed: 'Confirmée', ready: 'Prête', out_for_delivery: 'En route', completed: 'Livrée' }, askWa: 'Demander sur WhatsApp', faqH: 'Questions fréquentes', none: 'Aucun résultat. Posez-nous la question sur WhatsApp.', stillH: 'Besoin d’aide ?', stillBody: 'Notre équipe à Beyrouth répond sur WhatsApp, généralement dans la journée.',
       cards: [
         ['order', 'Aide commande', 'Une question sur une commande ? Envoyez-nous votre numéro (par exemple DAR-261105-AB12) sur WhatsApp.'],
         ['warranty', 'Garantie et réparations', 'Apportez ou envoyez le produit, une photo de l’emballage et de l’étiquette de série, et votre facture. Nous gérons la demande avec TOTAL ou Jadever.'],
@@ -90,7 +90,7 @@ export const PAGE = {
       chat: 'Discuter sur WhatsApp', form: 'Formulaire de contact', faq: 'Lire la FAQ',
     },
     contact: {
-      kicker: 'Contact', title: 'Contactez-nous', intro: 'Passez à la boutique, écrivez-nous sur WhatsApp ou envoyez votre question ci-dessous.',
+      kicker: 'Contact', title: 'Contactez-nous', title2: 'Parlons-en.', namePh: 'Votre nom', msgPh: 'Écrivez votre message…', online: 'Répond généralement dans la journée', today: 'Aujourd’hui', greet: 'Bonjour ! Comment pouvons-nous vous aider ? 👋', intro: 'Dites-nous ce dont vous avez besoin. Votre message arrive directement à notre équipe sur WhatsApp, et vous le voyez avant de l’envoyer.',
       shopH: 'La boutique', address: 'Sfeir Raya Center, Beyrouth, Liban', map: 'Ouvrir dans Google Maps', hoursH: 'Horaires', hours: 'Du lundi au samedi · horaires à confirmer',
       waH: 'WhatsApp', waBody: 'Le moyen le plus rapide de nous joindre.', waBtn: 'Discuter sur WhatsApp', followH: 'Suivez-nous',
       formH: 'Envoyez-nous un message', name: 'Nom complet', phone: 'Téléphone', subject: 'Sujet', message: 'Votre message',
@@ -102,7 +102,7 @@ export const PAGE = {
   },
   ar: {
     about: {
-      kicker: 'من نحن', title: 'أدوات تثق بها، من أناس يبنون',
+      kicker: 'من نحن', title: 'أدوات تثق بها، من أناس يبنون', promiseH: 'وعدنا', wordType: 'اسم', wordNote: 'تعني «البيت». نحن نبني البيوت، ونبيع الأدوات لتبني بيتك.',
       intro: 'DAR Building Materials Shop هو متجر الأدوات ومواد البناء التابع لـ DAR Trading & Contracting، في سنتر صفير رايا في بيروت.',
       storyH: 'قصتنا',
       story: ['«دار» تعني البيت. تبني DAR Trading & Contracting البيوت وتنفّذ أعمال التشطيب في كل لبنان على وعد واحد: النتيجة أولاً، والدفع بعدها.',
@@ -113,7 +113,7 @@ export const PAGE = {
       ctaShop: 'تسوّق الآن', ctaContact: 'اتصل بنا',
     },
     faq: {
-      kicker: 'مساعدة', title: 'الأسئلة الشائعة', intro: 'إجابات سريعة عن الطلب والتوصيل والدفع والكفالة. لم تجد جوابك؟ راسلنا على واتساب.',
+      kicker: 'مساعدة', title: 'الأسئلة الشائعة', intro: 'إجابات سريعة عن الطلب والتوصيل والدفع والكفالة. لم تجد جوابك؟ راسلنا على واتساب.', title2: 'أسئلتكم، وأجوبتنا.', searchPh: 'ابحث: التوصيل، الكفالة، البطاريات…', topics: 'المواضيع', count: n => `${n} أسئلة`, found: n => `${n} نتيجة`, groups: { order: 'الطلب', payment: 'الدفع والأسعار', delivery: 'التوصيل والاستلام', products: 'المنتجات والكفالة', business: 'المقاولون' }, helpful: 'هل كانت الإجابة مفيدة؟', yes: 'نعم', no: 'لا', thanks: 'شكراً لملاحظتك!', copy: 'نسخ الرابط', copied: 'تم النسخ ✓',
       items: [
         ['كيف أطلب؟', 'أضف المنتجات إلى طلبك، اضغط «إتمام الطلب»، أدخل معلوماتك واختر الطلب عبر واتساب أو الدفع عبر Whish. نؤكّد التوفّر والتوصيل والسعر النهائي عبر واتساب.'],
         ['ما طرق الدفع المتاحة؟', 'الدفع عند التسليم، أو في المتجر، أو أونلاين عبر Whish. الدفع بالبطاقة: قيد التأكيد.'],
@@ -128,7 +128,7 @@ export const PAGE = {
       ],
     },
     support: {
-      kicker: 'الدعم', title: 'نحن هنا لمساعدتك', intro: 'اختر ما تحتاج المساعدة فيه. أسرع طريقة للتواصل معنا هي واتساب.',
+      kicker: 'الدعم', title: 'نحن هنا لمساعدتك', intro: 'اختر ما تحتاج المساعدة فيه. أسرع طريقة للتواصل معنا هي واتساب.', title2: 'كيف يمكننا المساعدة؟', searchPh: 'ابحث: الطلبات، الكفالة، الإرجاع…', popular: 'الأكثر طلباً:', trackH: 'تتبّع طلبك', trackBody: 'أدخل رقم الطلب ورقم الهاتف الذي استخدمته.', trackRef: 'رقم الطلب', trackPhone: 'رقم الهاتف', trackBtn: 'تتبّع', trackIdle: 'سيظهر تقدّم طلبك هنا.', trackLooking: 'نبحث عن طلبك…', trackBadRef: 'رقم الطلب يشبه DAR-261105-AB12.', trackNotFound: 'لم نجد هذا الطلب. تحقّق من الرقم والهاتف أو راسلنا على واتساب.', trackCancelled: 'تم إلغاء هذا الطلب. راسلنا إن كان ذلك خطأ.', trackOffline: 'التتبّع المباشر قريباً. أرسل لنا رقم طلبك وسنتحقّق منه.', steps: { new: 'استُلم', confirmed: 'تأكّد', ready: 'جاهز', out_for_delivery: 'في الطريق', completed: 'تم التسليم' }, askWa: 'اسأل على واتساب', faqH: 'أسئلة شائعة', none: 'لا نتائج. اسألنا على واتساب.', stillH: 'ما زلت بحاجة إلى مساعدة؟', stillBody: 'فريقنا في بيروت يردّ على واتساب، عادةً خلال اليوم.',
       cards: [
         ['order', 'مساعدة في الطلب', 'لديك سؤال عن طلب؟ أرسل لنا رقم الطلب (مثلاً DAR-261105-AB12) على واتساب.'],
         ['warranty', 'الكفالة والتصليح', 'أحضر أو أرسل المنتج وصورة العلبة وملصق الرقم التسلسلي والفاتورة. نتابع الطلب مع TOTAL أو Jadever عنك.'],
@@ -139,7 +139,7 @@ export const PAGE = {
       chat: 'راسلنا على واتساب', form: 'نموذج الاتصال', faq: 'الأسئلة الشائعة',
     },
     contact: {
-      kicker: 'اتصل بنا', title: 'اتصل بنا', intro: 'زر المتجر، أو راسلنا على واتساب، أو أرسل سؤالك من النموذج أدناه.',
+      kicker: 'اتصل بنا', title: 'اتصل بنا', title2: 'لنتحدّث.', namePh: 'اسمك', msgPh: 'اكتب رسالتك…', online: 'نردّ عادةً خلال اليوم', today: 'اليوم', greet: 'مرحباً! كيف يمكننا مساعدتك اليوم؟ 👋', intro: 'أخبرنا بما تحتاجه. تصل رسالتك مباشرةً إلى فريقنا على واتساب، وتراها قبل إرسالها.',
       shopH: 'المتجر', address: 'سنتر صفير رايا، بيروت، لبنان', map: 'افتح في خرائط Google', hoursH: 'الدوام', hours: 'من الاثنين إلى السبت · الدوام قيد التأكيد',
       waH: 'واتساب', waBody: 'أسرع طريقة للتواصل معنا.', waBtn: 'راسلنا على واتساب', followH: 'تابعنا',
       formH: 'أرسل لنا رسالة', name: 'الاسم الكامل', phone: 'رقم الهاتف', subject: 'الموضوع', message: 'رسالتك',

@@ -1,11 +1,11 @@
-// DAR admin panel (admin.html): orders, messages, products (add/edit/photos), site settings.
+// DAR admin panel (/admin): orders, messages, products (add/edit/photos), site settings.
 // Login uses Supabase Auth (email + password). Only users listed in public.staff
 // can see or change anything: the database's row level security enforces this,
 // so even a logged-in non-staff account gets empty lists.
 import { createClient } from '@supabase/supabase-js';
 import './admin.css';
 
-const URL = import.meta.env.VITE_SUPABASE_URL, KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const URL = process.env.NEXT_PUBLIC_SUPABASE_URL, KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const db = URL && KEY ? createClient(URL, KEY, { auth: { persistSession: true, storageKey: 'dar-staff' } }) : null;
 const $ = (s, el = document) => el.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));

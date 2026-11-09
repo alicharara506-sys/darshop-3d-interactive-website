@@ -1,6 +1,9 @@
 # dependencies and build output (recreate with npm install / npm run build)
 node_modules/
 dist/
+.next/
+next-env.d.ts
+*.tsbuildinfo
 # 66 MB original Higgsfield model; the compressed one is in public/products/total/3d-hf/
 media-src/drill_raw.glb
 # Python cache

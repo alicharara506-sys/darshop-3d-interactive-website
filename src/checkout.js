@@ -5,7 +5,6 @@
 // server to create the payment; until then the Whish step shows a confirmation
 // screen and no money is taken.
 
-import { companyLinksHTML } from './site-nav.js';
 
 // Shop contact details. Fill in the missing ones before launch.
 export const CONTACT = {
@@ -33,44 +32,7 @@ export const ICONS = {
 };
 
 export const waLink = text => `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(text)}`;
-const social = (key, label) => CONTACT[key]
-  ? `<a class="f-soc ${key}" href="${CONTACT[key]}" target="_blank" rel="noopener" aria-label="${label}">${ICONS[key]}</a>`
-  : `<a class="f-soc ${key} pending" href="#" onclick="return false" aria-label="${label}" title="Link coming soon">${ICONS[key]}</a>`;
 
-export function footerHTML(tt, lang) {
-  const f = tt.foot;
-  return `
-  <div class="f-top">
-    <div class="f-brand">
-      <a class="f-logo" href="/?lang=${lang}" aria-label="DAR Building Materials Shop">
-        <svg viewBox="0 0 34 56" aria-hidden="true"><circle cx="8" cy="10" r="6" fill="none" stroke="#ff5a1f" stroke-width="3"/><rect x="22" y="0" width="4.5" height="56" fill="#ff5a1f"/></svg>
-        <span><b>DAR</b><small>Building Materials <em>Shop</em></small></span>
-      </a>
-      <p class="f-tag">${f.tagline}</p>
-      <p class="f-partners"><span>${f.partners}</span><i class="t">TOTAL</i><i class="j">Jadever</i></p>
-      <div class="f-socials">${social('instagram', 'Instagram')}${social('facebook', 'Facebook')}${social('tiktok', 'TikTok')}</div>
-    </div>
-    <nav class="f-col"><h4>${f.shop}</h4>
-      <a href="/shop.html?brand=total&lang=${lang}">${f.shopTotal}</a>
-      <a href="/shop.html?brand=jadever&lang=${lang}">${f.shopJadever}</a>
-      <a href="/shop.html?brand=all&cat=power&lang=${lang}">${tt.cats.power}</a>
-      <a href="/shop.html?brand=all&cat=hand&lang=${lang}">${tt.cats.hand}</a>
-      <a href="/shop.html?brand=all&cat=garden&lang=${lang}">${tt.cats.garden}</a>
-    </nav>
-    ${companyLinksHTML(lang)}
-    <div class="f-col"><h4>${f.visit}</h4>
-      <p class="f-row">${ICONS.pin}<span>${f.address}</span></p>
-      <p class="f-row">${ICONS.clock}<span>${CONTACT.hours?.[lang] || f.hours}</span></p>
-      <a class="f-row f-wa" href="${waLink(tt.waAsk)}" target="_blank" rel="noopener">${ICONS.whatsapp}<span>${f.chat}</span></a>
-    </div>
-    <div class="f-col"><h4>${f.pay}</h4>
-      <p class="f-row">${ICONS.whatsapp}<span>${f.payWa}</span></p>
-      <p class="f-row">${ICONS.card}<span>${f.payWhish}</span></p>
-      <p class="f-row">${ICONS.pin}<span>${f.payStore}</span></p>
-    </div>
-  </div>
-  <div class="f-bottom"><p>© ${new Date().getFullYear()} DAR Building Materials Shop · ${f.rights}</p><p class="s-proto">${tt.proto}</p></div>`;
-}
 
 // ---------- checkout (inside the order drawer) ----------
 export function makeRef() {
