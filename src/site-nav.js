@@ -3,18 +3,19 @@
 import { SHOP } from './shop-i18n.js';
 import { STR } from './i18n.js';
 import { CAT_ICONS } from './cat-icons.js';
+import { showMascotSearch } from './components/mascot/feedback-events';
 import './site-nav.css';
 
 export const NAV = {
   en: { home: 'Home', shop: 'Shop', about: 'About DAR', faq: 'FAQ', support: 'Support', contact: 'Contact us', menu: 'Menu', company: 'Company', help: 'Help',
     aboutShort: 'About', contactShort: 'Contact', brands: 'Brands', shopNow: 'Shop now', searchBtn: 'Search', language: 'Language', close: 'Close', browse: 'Browse', partner: 'Official partner',
-    products: 'Products', seeAll: q => `See all results for “${q}”`, noResults: 'Nothing matches that search yet.', keyMove: 'to move', keyOpen: 'to open', keyClose: 'to close' },
+    products: 'Products', seeAll: q => `See all results for “${q}”`, keyMove: 'to move', keyOpen: 'to open', keyClose: 'to close' },
   fr: { home: 'Accueil', shop: 'Boutique', about: 'À propos de DAR', faq: 'FAQ', support: 'Assistance', contact: 'Contact', menu: 'Menu', company: 'Société', help: 'Aide',
     aboutShort: 'À propos', contactShort: 'Contact', brands: 'Marques', shopNow: 'Acheter', searchBtn: 'Rechercher', language: 'Langue', close: 'Fermer', browse: 'Parcourir', partner: 'Partenaire officiel',
-    products: 'Produits', seeAll: q => `Voir tous les résultats pour « ${q} »`, noResults: 'Aucun résultat pour cette recherche.', keyMove: 'naviguer', keyOpen: 'ouvrir', keyClose: 'fermer' },
+    products: 'Produits', seeAll: q => `Voir tous les résultats pour « ${q} »`, keyMove: 'naviguer', keyOpen: 'ouvrir', keyClose: 'fermer' },
   ar: { home: 'الرئيسية', shop: 'المتجر', about: 'من نحن', faq: 'الأسئلة الشائعة', support: 'الدعم', contact: 'اتصل بنا', menu: 'القائمة', company: 'الشركة', help: 'مساعدة',
     aboutShort: 'من نحن', contactShort: 'اتصل بنا', brands: 'العلامات', shopNow: 'تسوّق الآن', searchBtn: 'بحث', language: 'اللغة', close: 'إغلاق', browse: 'تصفّح', partner: 'شريك رسمي',
-    products: 'المنتجات', seeAll: q => `عرض كل نتائج «${q}»`, noResults: 'لا توجد نتائج لهذا البحث.', keyMove: 'للتنقل', keyOpen: 'للفتح', keyClose: 'للإغلاق' },
+    products: 'المنتجات', seeAll: q => `عرض كل نتائج «${q}»`, keyMove: 'للتنقل', keyOpen: 'للفتح', keyClose: 'للإغلاق' },
 };
 export const PAGES = ['about', 'faq', 'support', 'contact'];
 const CAT_ORDER = ['power', 'accessories', 'generators', 'welding', 'construction', 'air', 'pumps', 'hand', 'measure', 'safety', 'garden'];
@@ -119,6 +120,7 @@ export function mountHeader(el, opts) {
       <div class="h-s-box">
         <label class="h-s-row">${I.search}<input id="hInput" type="search" autocomplete="off" role="combobox" aria-expanded="true" aria-controls="hResults" placeholder="${esc(sh().search)}" /><button type="button" data-h-act="closeDialog" aria-label="${t.close}"><kbd>esc</kbd></button></label>
         <div class="h-results" id="hResults" role="listbox"></div>
+        <div id="hMascotSearch" hidden></div>
         <p class="h-s-keys"><span><kbd>↑</kbd><kbd>↓</kbd> ${t.keyMove}</span><span><kbd>↵</kbd> ${t.keyOpen}</span><span><kbd>esc</kbd> ${t.keyClose}</span></p>
       </div>
     </dialog>
@@ -202,13 +204,17 @@ export function mountHeader(el, opts) {
     return { cats, list };
   }
   function renderResults() {
-    const text = $('#hInput').value.trim(), t = n(), box = $('#hResults');
+    const input = $('#hInput'), text = input.value.trim(), t = n(), box = $('#hResults');
     const catRow = c => `<a class="h-r" role="option" href="${shopUrl(lang, { cat: c })}"><i class="h-r-ic">${CAT_ICONS[c]}</i><span><b>${sh().cats[c]}</b><small>${sh().count(catalog.filter(p => p.cat === c).length)}</small></span>${I.arrow}</a>`;
+    const { cats, list } = text && catalog ? matches(text) : { cats: [], list: [] };
+    const empty = Boolean(catalog && text && !cats.length && !list.length);
+    box.hidden = empty;
+    input.setAttribute('aria-expanded', String(Boolean(catalog) && !empty));
+    showMascotSearch($('#hMascotSearch'), lang, 'header', empty);
     if (!catalog) { box.innerHTML = ''; return; }
     if (!text) box.innerHTML = `<p class="h-r-h">${sh().categories}</p>${CAT_ORDER.filter(c => catalog.some(p => p.cat === c)).map(catRow).join('')}`;
     else {
-      const { cats, list } = matches(text);
-      box.innerHTML = !cats.length && !list.length ? `<p class="h-r-none">${t.noResults}</p>` : `
+      box.innerHTML = empty ? '' : `
         ${cats.length ? `<p class="h-r-h">${sh().categories}</p>${cats.slice(0, 3).map(catRow).join('')}` : ''}
         ${list.length ? `<p class="h-r-h">${t.products}</p>${list.slice(0, 6).map(p => `<a class="h-r" role="option" data-h-pid="${esc(p.id)}" href="${shopUrl(lang, { open: p.id })}">
           <i class="h-r-pic">${p.img ? `<img src="${esc(p.img)}" alt="" loading="lazy" />` : CAT_ICONS[p.cat] || ''}</i>

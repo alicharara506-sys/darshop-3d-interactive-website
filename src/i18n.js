@@ -2,6 +2,18 @@
 // The Arabic is a draft and needs a native review before anything goes live.
 export const STR = {
   en: {
+    mascot: {
+      greeting: 'Hi! What are you building today?', categories: 'What are you working on?', browse: 'Browse categories', home: 'Home',
+      added: 'Added to cart!', missing: 'Hmm… I can’t find this page.', empty: 'No results, try another word?',
+      soon: 'We’re almost ready, see you soon!',
+      trades: {
+        tools: ['Tools', 'Let’s find the right tool for the job.'],
+        electrical: ['Electrical', 'Checking a circuit? Start with a tester.'],
+        plumbing: ['Plumbing', 'Clogged drain? I’ve got a tool for that.'],
+        'building-materials': ['Building', 'Get your site ready for the heavy work.'],
+        paint: ['Paint', 'Give the job a clean finish.'],
+      },
+    },
     shelf: {
       kicker: 'The DAR shelf', title: 'Find the right tool, fast.', byBrand: 'Browse by brand', byJob: 'What are you building?', all: 'All',
       jobs: { drilling: 'Drilling', demolition: 'Demolition', metal: 'Metal & welding', finishing: 'Finishing', garden: 'Garden' },
@@ -30,6 +42,18 @@ export const STR = {
     },
   },
   fr: {
+    mascot: {
+      greeting: 'Salut ! Qu’est-ce que tu construis aujourd’hui ?', categories: 'Sur quoi travailles-tu ?', browse: 'Voir les catégories', home: 'Accueil',
+      added: 'Ajouté au panier !', missing: 'Hmm… Je ne trouve pas cette page.', empty: 'Aucun résultat. Essaie un autre mot ?',
+      soon: 'On est presque prêts, à bientôt !',
+      trades: {
+        tools: ['Outils', 'Trouvons le bon outil pour le travail.'],
+        electrical: ['Électricité', 'Tu vérifies un circuit ? Commence avec un testeur.'],
+        plumbing: ['Plomberie', 'Un tuyau bouché ? J’ai l’outil qu’il te faut.'],
+        'building-materials': ['Chantier', 'Prépare ton chantier pour les gros travaux.'],
+        paint: ['Peinture', 'Pour une finition propre et soignée.'],
+      },
+    },
     shelf: {
       kicker: 'L’étagère DAR', title: 'Le bon outil, tout de suite.', byBrand: 'Parcourir par marque', byJob: 'Que construisez-vous ?', all: 'Tout',
       jobs: { drilling: 'Perçage', demolition: 'Démolition', metal: 'Métal et soudure', finishing: 'Finitions', garden: 'Jardin' },
@@ -58,6 +82,18 @@ export const STR = {
     },
   },
   ar: {
+    mascot: {
+      greeting: 'أهلا! شو بدّك تعمّر اليوم؟', categories: 'ع شو عم تشتغل؟', browse: 'تصفّح الفئات', home: 'الرئيسية',
+      added: 'انضاف عالسلة!', missing: 'همم… ما لقيت هالصفحة.', empty: 'ما في نتايج، جرّب كلمة تانية؟',
+      soon: 'قرّبنا نخلص، منشوفك قريبًا!',
+      trades: {
+        tools: ['عدّة', 'خلّينا نلاقي العدّة الصح للشغلة.'],
+        electrical: ['كهربا', 'عم تفحص الكهربا؟ بلّش بفاحص.'],
+        plumbing: ['صحّية', 'المجرور مسكّر؟ عندي عدّة بتساعدك.'],
+        'building-materials': ['بناء', 'جهّز الورشة للشغل التقيل.'],
+        paint: ['دهان', 'خلّي تشطيب شغلك نضيف.'],
+      },
+    },
     shelf: {
       kicker: 'رفّ DAR', title: 'الأداة المناسبة، بسرعة.', byBrand: 'تصفّح حسب العلامة', byJob: 'ماذا تبني؟', all: 'الكل',
       jobs: { drilling: 'الثقب', demolition: 'الهدم', metal: 'المعادن واللحام', finishing: 'التشطيبات', garden: 'الحديقة' },

@@ -9,6 +9,7 @@ import { JOBS } from './shelf-jobs.js';
 import catalog from '../data/catalog-sakr.json';
 import { mountHeader } from './site-nav.js';
 import { mountFooter } from './site-footer.js';
+import { announceCartAdd } from './components/mascot/feedback-events';
 import { setHeroState, registerHeroActions } from './home-bridge.js';
 import './style.css';
 
@@ -754,6 +755,7 @@ function addToOrder(ids) {
   for (const id of ids) order[id] = (order[id] || 0) + 1;
   localStorage.setItem('dar-order', JSON.stringify(order));
   header.setCart(orderCount());
+  if (ids.length) announceCartAdd(lang);
 }
 registerHeroActions({
   shelf(sel) { Object.assign(shelfSel, sel); },

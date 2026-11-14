@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { Mascot } from '@/components/mascot/Mascot'
 
 import '@/site-nav.css'
 import '@/shop.css'
@@ -20,10 +21,16 @@ export function ShopClient() {
         <div className="sh-hero-in" id="heroText" />
       </section>
 
-      <section className="sh-bar" id="catrow" aria-label="Categories" />
+      <section className="sh-bar" id="catrow" aria-label="Categories">
+        <div className="sh-bar-in">
+          <Mascot pose="point" size="sm" decorative />
+          <div id="catrowControls" />
+        </div>
+      </section>
 
       <main className="sh-main">
         <div className="s-tools" id="tools" />
+        <div className="s-empty" id="shopMascotSearch" hidden />
         <ul className="sh-grid" id="grid" />
       </main>
 

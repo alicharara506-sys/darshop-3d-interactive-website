@@ -4,13 +4,14 @@ import { useEffect } from 'react'
 
 import { HeroCopy, type Lang } from './HeroCopy'
 import { ShelfPanel } from './ShelfPanel'
+import type { MascotVideoSources } from '@/components/mascot/mascot.config'
 
 import '@/site-nav.css'
 import '@/style.css'
 
 // The home page: main.js runs the 3D scene, the header and the later scroll stages, and
 // the first stage's words are React (HeroCopy).
-export function HomeClient({ lang }: { lang: Lang }) {
+export function HomeClient({ lang, videoSources }: { lang: Lang; videoSources: MascotVideoSources }) {
   useEffect(() => {
     import('@/main.js')
   }, [])
@@ -22,7 +23,7 @@ export function HomeClient({ lang }: { lang: Lang }) {
         <div id="tip" className="tip" />
       </div>
       <section id="panel" className="panel empty" aria-live="polite" />
-      <HeroCopy initialLang={lang} />
+      <HeroCopy initialLang={lang} videoSources={videoSources} />
       <ShelfPanel initialLang={lang} />
       <div className="scroller" />
       <footer id="siteFoot" />
