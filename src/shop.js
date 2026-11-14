@@ -7,6 +7,7 @@ import { CAT_ICONS } from './cat-icons.js';
 import { LIVE, loadProducts, placeOrder, loadSettings } from './api.js';
 import { mountHeader } from './site-nav.js';
 import { mountFooter } from './site-footer.js';
+import { announceCartAdd, showMascotSearch } from './components/mascot/feedback-events';
 import { applySettings, ICONS, detailsHTML, doneHTML, orderMessage, validate, makeRef, waLink } from './checkout.js';
 import './shop.css';
 
@@ -40,7 +41,7 @@ function syncUrl() {
   const u = new URLSearchParams({ brand: state.brand, lang: state.lang });
   if (state.cat !== 'all') u.set('cat', state.cat);
   if (state.search) u.set('q', state.search);
-  history.replaceState(null, '', `?${u}`);
+  history.replaceState(null, '', `?${u}${location.hash}`);
 }
 
 function visible() {
@@ -94,8 +95,8 @@ function renderSide() {
   const counts = Object.fromEntries(CAT_ORDER.map(c => [c, base.filter(p => p.cat === c).length]));
   const chip = (key, icon, label, n, soon) => `<button class="sh-chip ${state.cat === key ? 'on' : ''} ${soon ? 'soon' : ''}" ${soon ? 'disabled' : `data-cat="${key}"`}>
       <i>${icon}</i><span>${label}</span><em>${soon ? tt.soonCat : n}</em></button>`;
-  $('catrow').innerHTML = `<div class="sh-bar-in">
-    <div class="sh-chips-wrap" id="chipsWrap">
+  $('catrow').setAttribute('aria-label', tt.categories);
+  $('catrowControls').innerHTML = `<div class="sh-chips-wrap" id="chipsWrap">
     <button class="sh-arrow prev" data-chips="-1" aria-label="previous"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
     <div class="sh-chips" id="chips" role="toolbar" aria-label="${tt.categories}">
       ${chip('all', CAT_ICONS.all, tt.all, base.length, false)}
@@ -107,8 +108,7 @@ function renderSide() {
       <button class="sh-sort-btn" data-sort-toggle aria-haspopup="listbox" aria-expanded="false" aria-label="${esc(tt.sort)}">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16M3.5 16.5 7 20l3.5-3.5M17 20V4m-3.5 3.5L17 4l3.5 3.5"/></svg><span>${tt.sorts[state.sort]}</span><i aria-hidden="true"></i></button>
       <ul class="sh-sort-menu" role="listbox">${Object.entries(tt.sorts).map(([k, v], i) => `<li><button role="option" aria-selected="${state.sort === k}" data-sort="${k}" class="${state.sort === k ? 'on' : ''}" style="--i:${i}">${v}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></button></li>`).join('')}</ul>
-    </div>
-  </div>`;
+    </div>`;
   const chips = $('chips'), on = chips.querySelector('.sh-chip.on');
   if (on && state.cat !== 'all') chips.scrollLeft += on.getBoundingClientRect().left - chips.getBoundingClientRect().left - chips.clientWidth / 2 + on.offsetWidth / 2;
   chips.addEventListener('scroll', chipEdges, { passive: true });
@@ -247,7 +247,8 @@ function renderGrid() {
         <div class="sh-buy"><p class="s-price">${priceHTML(p)}</p>${cardActions(p)}</div>
       </div>
     </li>`).join('')
-    : `<li class="s-empty"><p>${tt.none}</p><button data-clear>${tt.clear}</button></li>`;
+    : state.search.trim() ? '' : `<li class="s-empty"><p>${tt.none}</p><button data-clear>${tt.clear}</button></li>`;
+  showMascotSearch($('shopMascotSearch'), state.lang, 'shop', !list.length && Boolean(state.search.trim()));
   revealCards();
 }
 // Cards rise in as they scroll into view.
@@ -398,7 +399,7 @@ function removeLine(el, id) {
     .then(done, done);
 }
 function save() { localStorage.setItem('dar-order', JSON.stringify(cart)); renderCart(); }
-function add(id) { cart[id] = (cart[id] || 0) + 1; save(); renderGrid(); }
+function add(id) { cart[id] = (cart[id] || 0) + 1; save(); announceCartAdd(state.lang); renderGrid(); }
 function closeAll() {
   document.body.classList.remove('mod-open', 'dr-open');
   if (co.step === 'done') { co.step = 'cart'; co.done = null; setTimeout(renderCart, 300); }

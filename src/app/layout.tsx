@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from 'next'
 import type { ReactNode } from 'react'
+import { MascotFeedback } from '@/components/mascot/MascotFeedback'
 
 import './globals.css'
+import '@/components/mascot/mascot.css'
 
 export const metadata: Metadata = {
   title: 'DAR Building Materials Shop · Beirut',
@@ -26,7 +28,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="stylesheet" href={FONTS} />
       </head>
-      <body>{children}</body>
+      <body><MascotFeedback />{children}</body>
     </html>
   )
 }

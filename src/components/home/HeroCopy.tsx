@@ -20,6 +20,8 @@ import {
 
 import { getHeroState, heroActions, subscribeHero } from '@/home-bridge.js'
 import { STR } from '@/i18n.js'
+import { HeroMascot } from '@/components/mascot/HeroMascot'
+import type { MascotVideoSources } from '@/components/mascot/mascot.config'
 
 import { HeroBuildCard } from './HeroBuildCard'
 
@@ -168,7 +170,7 @@ export function HeroBackdrop() {
 // kicker types in beside a live dot, the headline's words rise from behind masks with its
 // key word in a flowing orange, a tape measure draws itself, then the line of text, the
 // buttons and a quiet line naming the official partners follow.
-export function HeroCopy({ initialLang }: { initialLang: Lang }) {
+export function HeroCopy({ initialLang, videoSources }: { initialLang: Lang; videoSources: MascotVideoSources }) {
   const state = useSyncExternalStore(subscribeHero, getHeroState, () => SERVER_STATE)
   const lang = (state.lang ?? initialLang) as Lang
   const visible = state.stage === 0
@@ -246,6 +248,8 @@ export function HeroCopy({ initialLang }: { initialLang: Lang }) {
               <HeroButton primary href={`/shop?brand=all&lang=${lang}`}>{hero.shop}</HeroButton>
               <HeroButton href={`/contact?lang=${lang}`}>{hero.visit}</HeroButton>
             </div>
+
+            <HeroMascot lang={lang} active={visible} videoSources={videoSources} />
 
             <div className="mt-9 flex items-center gap-4 tall:mt-3 tall:flex-wrap tall:gap-x-3 tall:gap-y-1 squat:mt-3 [@media(max-height:680px)]:mt-6">
               <p className="hero-up m-0 text-[11px] font-semibold tracking-[.12em] whitespace-nowrap text-steel/80 uppercase rtl:text-[13px] rtl:tracking-normal tall:text-[10px] tall:tracking-[.08em] squat:text-[10px]" style={step(after + 5)}>

@@ -2,6 +2,30 @@
 // The Arabic is a draft and needs a native review before anything goes live.
 export const STR = {
   en: {
+    landing: {
+      title: 'Building materials and tools in Beirut',
+      intro: 'Find what you need for your next job.',
+      shop: 'Browse the shop', jobs: 'Shop by job', view: 'View in the shop',
+      expert: 'The DAR Expert', side: 'Side view', front: 'Front view',
+      trades: {
+        'building-materials': ['Building', 'Steel ladders and wheelbarrows'],
+        electrical: ['Electrical', 'Socket testers and voltage detectors'],
+        plumbing: ['Plumbing', 'Drain augers'],
+        paint: ['Painting', 'Paint brushes and tray sets'],
+      },
+    },
+    mascot: {
+      greeting: 'Hi! What are you building today?', categories: 'What are you working on?', browse: 'Browse categories', home: 'Home',
+      added: 'Added to cart!', missing: 'Hmm… I can’t find this page.', empty: 'No results, try another word?',
+      soon: 'We’re almost ready, see you soon!',
+      trades: {
+        tools: ['Tools', 'Let’s find the right tool for the job.'],
+        electrical: ['Electrical', 'Checking a circuit? Start with a tester.'],
+        plumbing: ['Plumbing', 'Clogged drain? I’ve got a tool for that.'],
+        'building-materials': ['Building', 'Get your site ready for the heavy work.'],
+        paint: ['Paint', 'Give the job a clean finish.'],
+      },
+    },
     shelf: {
       kicker: 'The DAR shelf', title: 'Find the right tool, fast.', byBrand: 'Browse by brand', byJob: 'What are you building?', all: 'All',
       jobs: { drilling: 'Drilling', demolition: 'Demolition', metal: 'Metal & welding', finishing: 'Finishing', garden: 'Garden' },
@@ -30,6 +54,30 @@ export const STR = {
     },
   },
   fr: {
+    landing: {
+      title: 'Matériaux et outils à Beyrouth',
+      intro: 'Trouvez ce qu’il vous faut pour votre prochain chantier.',
+      shop: 'Voir la boutique', jobs: 'Acheter par projet', view: 'Voir en boutique',
+      expert: 'L’expert DAR', side: 'Vue de côté', front: 'Vue de face',
+      trades: {
+        'building-materials': ['Construction', 'Échelles en acier et brouettes'],
+        electrical: ['Électricité', 'Testeurs de prise et détecteurs de tension'],
+        plumbing: ['Plomberie', 'Furets de débouchage'],
+        paint: ['Peinture', 'Pinceaux et bacs à peinture'],
+      },
+    },
+    mascot: {
+      greeting: 'Salut ! Qu’est-ce que tu construis aujourd’hui ?', categories: 'Sur quoi travailles-tu ?', browse: 'Voir les catégories', home: 'Accueil',
+      added: 'Ajouté au panier !', missing: 'Hmm… Je ne trouve pas cette page.', empty: 'Aucun résultat. Essaie un autre mot ?',
+      soon: 'On est presque prêts, à bientôt !',
+      trades: {
+        tools: ['Outils', 'Trouvons le bon outil pour le travail.'],
+        electrical: ['Électricité', 'Tu vérifies un circuit ? Commence avec un testeur.'],
+        plumbing: ['Plomberie', 'Un tuyau bouché ? J’ai l’outil qu’il te faut.'],
+        'building-materials': ['Chantier', 'Prépare ton chantier pour les gros travaux.'],
+        paint: ['Peinture', 'Pour une finition propre et soignée.'],
+      },
+    },
     shelf: {
       kicker: 'L’étagère DAR', title: 'Le bon outil, tout de suite.', byBrand: 'Parcourir par marque', byJob: 'Que construisez-vous ?', all: 'Tout',
       jobs: { drilling: 'Perçage', demolition: 'Démolition', metal: 'Métal et soudure', finishing: 'Finitions', garden: 'Jardin' },
@@ -58,6 +106,30 @@ export const STR = {
     },
   },
   ar: {
+    landing: {
+      title: 'مواد بناء وعدّة ببيروت',
+      intro: 'لاقوا اللي بتحتاجوه لشغلتكن الجايي.',
+      shop: 'تصفّحوا المتجر', jobs: 'تسوّقوا حسب الشغلة', view: 'شوفوها بالمتجر',
+      expert: 'خبير دار', side: 'من الجنب', front: 'من قدّام',
+      trades: {
+        'building-materials': ['بناء', 'سلالم حديد وعربايات يد'],
+        electrical: ['كهربا', 'فاحصات مقابس وكواشف جهد'],
+        plumbing: ['صحّية', 'عدّة لفتح المجاري المسكّرة'],
+        paint: ['دهان', 'فراشي وصواني دهان'],
+      },
+    },
+    mascot: {
+      greeting: 'أهلا! شو بدّك تعمّر اليوم؟', categories: 'ع شو عم تشتغل؟', browse: 'تصفّح الفئات', home: 'الرئيسية',
+      added: 'انضاف عالسلة!', missing: 'همم… ما لقيت هالصفحة.', empty: 'ما في نتايج، جرّب كلمة تانية؟',
+      soon: 'قرّبنا نخلص، منشوفك قريبًا!',
+      trades: {
+        tools: ['عدّة', 'خلّينا نلاقي العدّة الصح للشغلة.'],
+        electrical: ['كهربا', 'عم تفحص الكهربا؟ بلّش بفاحص.'],
+        plumbing: ['صحّية', 'المجرور مسكّر؟ عندي عدّة بتساعدك.'],
+        'building-materials': ['بناء', 'جهّز الورشة للشغل التقيل.'],
+        paint: ['دهان', 'خلّي تشطيب شغلك نضيف.'],
+      },
+    },
     shelf: {
       kicker: 'رفّ DAR', title: 'الأداة المناسبة، بسرعة.', byBrand: 'تصفّح حسب العلامة', byJob: 'ماذا تبني؟', all: 'الكل',
       jobs: { drilling: 'الثقب', demolition: 'الهدم', metal: 'المعادن واللحام', finishing: 'التشطيبات', garden: 'الحديقة' },
