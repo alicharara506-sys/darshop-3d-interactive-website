@@ -2,6 +2,18 @@
 // The Arabic is a draft and needs a native review before anything goes live.
 export const STR = {
   en: {
+    landing: {
+      title: 'Building materials and tools in Beirut',
+      intro: 'Find what you need for your next job.',
+      shop: 'Browse the shop', jobs: 'Shop by job', view: 'View in the shop',
+      expert: 'The DAR Expert', side: 'Side view', front: 'Front view',
+      trades: {
+        'building-materials': ['Building', 'Steel ladders and wheelbarrows'],
+        electrical: ['Electrical', 'Socket testers and voltage detectors'],
+        plumbing: ['Plumbing', 'Drain augers'],
+        paint: ['Painting', 'Paint brushes and tray sets'],
+      },
+    },
     mascot: {
       greeting: 'Hi! What are you building today?', categories: 'What are you working on?', browse: 'Browse categories', home: 'Home',
       added: 'Added to cart!', missing: 'Hmm… I can’t find this page.', empty: 'No results, try another word?',
@@ -42,6 +54,18 @@ export const STR = {
     },
   },
   fr: {
+    landing: {
+      title: 'Matériaux et outils à Beyrouth',
+      intro: 'Trouvez ce qu’il vous faut pour votre prochain chantier.',
+      shop: 'Voir la boutique', jobs: 'Acheter par projet', view: 'Voir en boutique',
+      expert: 'L’expert DAR', side: 'Vue de côté', front: 'Vue de face',
+      trades: {
+        'building-materials': ['Construction', 'Échelles en acier et brouettes'],
+        electrical: ['Électricité', 'Testeurs de prise et détecteurs de tension'],
+        plumbing: ['Plomberie', 'Furets de débouchage'],
+        paint: ['Peinture', 'Pinceaux et bacs à peinture'],
+      },
+    },
     mascot: {
       greeting: 'Salut ! Qu’est-ce que tu construis aujourd’hui ?', categories: 'Sur quoi travailles-tu ?', browse: 'Voir les catégories', home: 'Accueil',
       added: 'Ajouté au panier !', missing: 'Hmm… Je ne trouve pas cette page.', empty: 'Aucun résultat. Essaie un autre mot ?',
@@ -82,6 +106,18 @@ export const STR = {
     },
   },
   ar: {
+    landing: {
+      title: 'مواد بناء وعدّة ببيروت',
+      intro: 'لاقوا اللي بتحتاجوه لشغلتكن الجايي.',
+      shop: 'تصفّحوا المتجر', jobs: 'تسوّقوا حسب الشغلة', view: 'شوفوها بالمتجر',
+      expert: 'خبير دار', side: 'من الجنب', front: 'من قدّام',
+      trades: {
+        'building-materials': ['بناء', 'سلالم حديد وعربايات يد'],
+        electrical: ['كهربا', 'فاحصات مقابس وكواشف جهد'],
+        plumbing: ['صحّية', 'عدّة لفتح المجاري المسكّرة'],
+        paint: ['دهان', 'فراشي وصواني دهان'],
+      },
+    },
     mascot: {
       greeting: 'أهلا! شو بدّك تعمّر اليوم؟', categories: 'ع شو عم تشتغل؟', browse: 'تصفّح الفئات', home: 'الرئيسية',
       added: 'انضاف عالسلة!', missing: 'همم… ما لقيت هالصفحة.', empty: 'ما في نتايج، جرّب كلمة تانية؟',
